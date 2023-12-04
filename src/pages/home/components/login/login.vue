@@ -76,6 +76,7 @@
 </template>
 
 <script setup>
+import { showFailToast, showSuccessToast } from "vant";
 import { defineProps, computed, ref, reactive, defineEmits } from "vue";
 import { phonePattern, setToken } from "@/utils";
 import { CodeIcon, PhoneIcon } from "./assets";
@@ -130,12 +131,18 @@ const handleLogin = async () => {
       setToken(token);
       emit("update:value", false);
       emit("login:success", user);
-    } else if (code === 20020) {
+    } else if (code === 2002) {
       emit("update:value", false);
       emit("login:register");
+    } else if (code ===  20016) {
+      loginLoading.value = false;
+      showFailToast("验证码错误");
+    } else {
+      loginLoading.value = false;
+      showFailToast("登录失败");
     }
   } finally {
-    loginLoading.value = true;
+    loginLoading.value = false;
   }
 };
 </script>
