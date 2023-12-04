@@ -12,6 +12,7 @@
           :after-read="afterRead"
           @delete="handleUploadDelete"
           upload-text="点击上传"
+          accept="image/*"
         >
         </van-uploader>
       </van-collapse-item>
