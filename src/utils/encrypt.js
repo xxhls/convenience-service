@@ -15,7 +15,7 @@ export const encrypt = async (data) => {
     if (code === 0) {
       publicKey = data;
     }
-    return Promise.reject();
+    // return Promise.resolve();
   }
   const jsencrypt = new JSEncrypt();
   jsencrypt.setPublicKey(publicKey);

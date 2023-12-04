@@ -98,8 +98,11 @@ const sendCodeDisabled = computed(() => {
   return !phonePattern.test(loginModel.phoneNumber);
 });
 const handleSendCode = async () => {
+  console.log("发送验证码");
   try {
     codeLoading.value = true;
+    console.log(loginModel.phoneNumber)
+    debugger
     const { code } = await sendCode(loginModel.phoneNumber);
     if (code === 20201) {
       codeSended.value = true;
