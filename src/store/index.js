@@ -47,6 +47,18 @@ export const useUserInfoStore = defineStore("userStore", {
         this.setUserInfo(data);
       }
     },
+    resetUserInfo() {
+      this.hasGetInfo = false;
+      this.userId = "";
+      this.userName = "";
+      this.userPhone = "";
+      this.userIdentityCard = "";
+      this.userRegionId = "";
+      this.userRegionName = "";
+      this.linkRegionId = "";
+      this.linkRegionName = "";
+      this.regionTag = "empty";
+    },
     /**
      * 
      * @param {"empty" | "router" | "user"} tag 

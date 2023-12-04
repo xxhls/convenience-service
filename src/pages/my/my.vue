@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-box">
     <div class="user-info">
       <van-image round width="80px" height="80px" :src="DefaultIcon" />
       <div class="right">
@@ -28,12 +28,18 @@
         </template>
       </van-cell>
     </div>
+    <div class="footer">
+      <van-button type="danger" round block @click="deleteLogin">
+        注销登录
+      </van-button>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { computed, reactive } from "vue";
 import { useRouter } from "vue-router";
+import { removeToken } from "@/utils/token";
 import { useUserInfoStore } from "@/store";
 import { Region } from "@/components";
 import {
@@ -106,10 +112,26 @@ const handleGotoList = (item) => {
   });
 };
 
+const deleteLogin = () =>{
+  removeToken();
+  router.push({
+    name: "home",
+    query: {
+      regionId: store.linkRegionId,
+    }
+  });
+  store.resetUserInfo();
+}
+
 getTasks();
 </script>
 
 <style lang="scss" scoped>
+.my-box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 .user-info {
   display: flex;
   align-items: center;
@@ -165,5 +187,12 @@ getTasks();
       margin-right: 11px;
     }
   }
+}
+.footer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
 }
 </style>
