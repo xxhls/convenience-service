@@ -4,8 +4,8 @@
       <div v-if="html" v-html="html"></div>
     </div>
     <div v-else>
-      <div class="img-box">
-        <img v-for="(item, index) in imageList" :key="index" :src="item" />
+      <div class="img-box" >
+        <img v-for="(item, index) in imageList" :key="index" :src="item" @click="previewImage(item)"/>
       </div>
     </div>
   </div>
@@ -15,7 +15,7 @@
 import { inject, ref, nextTick, computed } from "vue";
 import { nanoid } from "nanoid";
 import { setToastDefaultOptions, resetToastDefaultOptions } from 'vant';
-import { showLoadingToast, closeToast, showFailToast } from "vant";
+import { showLoadingToast, closeToast, showFailToast, showImagePreview } from "vant";
 import { loadImage } from "@/services";
 import { getTempleteParams } from "../../services";
 import { FILE_SOURCE, APPLY_INFO_INJECT } from "../../context";
@@ -65,6 +65,10 @@ const getImageList = () => {
     imageList.value.push(url);
   });
 };
+
+const previewImage = (url) => {
+  showImagePreview([url]);
+}
 
 /**
  * 生成文档
@@ -134,11 +138,13 @@ init();
   padding: 0 40px 20px 40px;
 }
 .img-box {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   img {
     max-width: 120px;
+    display: block;
+    margin-top: 20px;
   }
 }
 </style>
