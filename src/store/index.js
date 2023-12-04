@@ -14,6 +14,7 @@ export const useUserInfoStore = defineStore("userStore", {
       linkRegionId: "",
       linkRegionName: "",
       regionTag: "empty",
+      loginStatus: false,
     };
   },
   actions: {
@@ -27,11 +28,13 @@ export const useUserInfoStore = defineStore("userStore", {
       this.userRegionId = region.regionId;
       this.userRegionName = region.regionName;
     },
+    updateLoginStatus(status) {
+      this.loginStatus = status;
+    },
     setLinkRegion(region) {
       this.linkRegionId = region.regionId;
       this.linkRegionName = region.regionName;
     },
-
     setUserInfo(userInfo) {
       this.hasGetInfo = true;
       this.userId = userInfo.id;
@@ -58,6 +61,7 @@ export const useUserInfoStore = defineStore("userStore", {
       this.linkRegionId = "";
       this.linkRegionName = "";
       this.regionTag = "empty";
+      this.loginStatus = false;
     },
     /**
      * 

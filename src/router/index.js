@@ -83,17 +83,24 @@ router.beforeEach(async (to, from) => {
       return {
         name: HOME_PAGE,
         replace: true,
+        // query: {
+        //   ...from.query,
+        //   toLogin: true,
+        // },
         query: {
           ...from.query,
-          toLogin: true,
         },
       };
     }
     return {
       name: HOME_PAGE,
+      // query: {
+      //   ...from.query,
+      //   toLogin: true,
+      // },
       query: {
         ...from.query,
-        toLogin: true,
+        // toLogin: true,
       },
     };
   }

@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount } from "vue";
+import { ref, onBeforeMount, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { Region } from "@/components";
 import { useUserInfoStore } from "@/store";
@@ -51,14 +51,19 @@ const route = useRoute();
 const userStore = useUserInfoStore();
 const linkRegionName = computed(() => userStore.linkRegionName);
 
-watch(
-  () => route.query,
-  (value) => {
-    if (value.toLogin) {
-      openLogin();
-    }
+// watch(
+//   () => route.query,
+//   (value) => {
+//     if (value.toLogin) {
+//       openLogin();
+//     }
+//   }
+// );
+onMounted(() => {
+  if (!userStore.loginStatus) {
+    openLogin();
   }
-);
+});
 
 const getLinkRegion = async () => {
   console.log('查询地址');
@@ -117,6 +122,7 @@ const handleLoginSucess = (data) => {
       regionName: data.fullName,
     });
   }
+  userStore.updateLoginStatus(true);
   // memory && handleClick(memory);
 };
 onBeforeMount(() => {
