@@ -1,5 +1,12 @@
 <template>
-  <van-popup :show="props.value" round position="bottom" class="login-popup">
+  <van-popup
+    :show="props.value"
+    round
+    closeable
+    position="bottom"
+    class="login-popup"
+    @close="handleClose"
+  >
     <div class="title">用户登录</div>
     <van-form>
       <van-field
@@ -38,7 +45,7 @@
             size="small"
             type="primary"
             :loading="codeLoading"
-            @click="handleSendCode"
+            @click.stop="handleSendCode"
             >发送验证码</van-button
           >
           <van-count-down
@@ -99,10 +106,8 @@ const sendCodeDisabled = computed(() => {
   return !phonePattern.test(loginModel.phoneNumber);
 });
 const handleSendCode = async () => {
-  console.log("发送验证码");
   try {
     codeLoading.value = true;
-    console.log(loginModel.phoneNumber)
     const { code } = await sendCode(loginModel.phoneNumber);
     if (code === 20201) {
       codeSended.value = true;
@@ -128,12 +133,12 @@ const handleLogin = async () => {
     const { code, token, user } = await login(phoneNumber, smsCode);
     if (code === 0) {
       setToken(token);
-      emit("update:value", false);
+      handleClose();
       emit("login:success", user);
     } else if (code === 2002) {
-      emit("update:value", false);
+      handleClose();
       emit("login:register");
-    } else if (code ===  20016) {
+    } else if (code === 20016) {
       loginLoading.value = false;
       showFailToast("验证码错误");
     } else {
@@ -143,6 +148,12 @@ const handleLogin = async () => {
   } finally {
     loginLoading.value = false;
   }
+};
+
+const handleClose = () => {
+  emit("update:value", false);
+  loginModel.phoneNumber = "";
+  loginModel.smsCode = "";
 };
 </script>
 

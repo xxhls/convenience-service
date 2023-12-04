@@ -7,7 +7,6 @@ const routes = [
   {
     path: "/",
     name: "main",
-    // redirect: "/home",
     redirect: (to) => {
       return {
         name: "home",
@@ -67,7 +66,6 @@ const router = createRouter({
 const HOME_PAGE = "home";
 const whiteList = [HOME_PAGE];
 router.beforeEach(async (to, from) => {
-
   const store = useUserInfoStore();
   if (isLogin()) {
     if (store.hasGetInfo) {
@@ -80,29 +78,18 @@ router.beforeEach(async (to, from) => {
     if (whiteList.includes(to.name)) {
       return true;
     } else if (from.name === HOME_PAGE) {
+      store.toogleLoginStatus(true);
+      return false;
+    } else {
+      store.toogleLoginStatus(true);
       return {
         name: HOME_PAGE,
         replace: true,
-        // query: {
-        //   ...from.query,
-        //   toLogin: true,
-        // },
         query: {
           ...from.query,
         },
       };
     }
-    return {
-      name: HOME_PAGE,
-      // query: {
-      //   ...from.query,
-      //   toLogin: true,
-      // },
-      query: {
-        ...from.query,
-        // toLogin: true,
-      },
-    };
   }
 });
 

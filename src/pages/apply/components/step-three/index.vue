@@ -6,6 +6,7 @@
         :name="FILE_SOURCE.upload"
       >
         <van-uploader
+          multiple
           v-model="fileList"
           :before-read="beforeRead"
           :after-read="afterRead"

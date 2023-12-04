@@ -25,8 +25,9 @@
   </div>
 
   <login
-    v-model:value="showLogin"
+    :value="userStore.loginStatus"
     @login:register="openRegister"
+    @update:value="handleShowChange"
     @login:success="handleLoginSucess"
   ></login>
   <register
@@ -36,14 +37,13 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, onMounted } from "vue";
+import { ref, onBeforeMount } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { Region } from "@/components";
 import { useUserInfoStore } from "@/store";
 import { queryRegionNameById } from "@/services";
 import { Banner, BusinessIcon, Login, Register } from "./components";
 import { fetchBusiness } from "./services";
-import { watch } from "vue";
 import { computed } from "vue";
 
 const router = useRouter();
@@ -51,28 +51,11 @@ const route = useRoute();
 const userStore = useUserInfoStore();
 const linkRegionName = computed(() => userStore.linkRegionName);
 
-// watch(
-//   () => route.query,
-//   (value) => {
-//     if (value.toLogin) {
-//       openLogin();
-//     }
-//   }
-// );
-onMounted(() => {
-  if (!userStore.loginStatus) {
-    openLogin();
-  }
-});
-
 const getLinkRegion = async () => {
-  console.log('查询地址');
-  console.log(route.query)
   const { regionId } = route.query;
   if (regionId) {
     const { code, data } = await queryRegionNameById(regionId);
     if (code === 0) {
-      userStore.setRegionTag("router");
       userStore.setLinkRegion({
         regionId,
         regionName: data,
@@ -89,11 +72,7 @@ const getBusiness = async () => {
   }
 };
 
-let memory;
 const handleClick = (bs) => {
-  if (!memory) {
-    memory = bs;
-  }
   router.push({
     name: "apply",
     query: {
@@ -103,9 +82,8 @@ const handleClick = (bs) => {
   });
 };
 
-const showLogin = ref(false);
-const openLogin = () => {
-  showLogin.value = true;
+const handleShowChange = (show) => {
+  userStore.toogleLoginStatus(show);
 };
 
 const showRegister = ref(false);
@@ -115,20 +93,11 @@ const openRegister = () => {
 
 const handleLoginSucess = (data) => {
   userStore.setUserInfo(data);
-  if (userStore.regionTag === "empty") {
-    userStore.setRegionTag("user");
-    userStore.setLinkRegion({
-      regionId: data.regionId,
-      regionName: data.fullName,
-    });
-  }
-  userStore.updateLoginStatus(true);
-  // memory && handleClick(memory);
 };
 onBeforeMount(() => {
   getBusiness();
   getLinkRegion();
-})
+});
 </script>
 
 <style lang="scss" scoped>

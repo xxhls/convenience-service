@@ -4,7 +4,7 @@
     <div class="frame-content">
       <router-view></router-view>
     </div>
-    <van-tabbar v-model="active" :fixed="false" @change="handleChange">
+    <van-tabbar :model-value="active" :fixed="false" @change="handleChange">
       <van-tabbar-item name="home"
         >首页
         <template #icon="props">
@@ -39,10 +39,13 @@ watch(
   }
 );
 
-const handleChange = (value) => {
-  router.push({
+const handleChange = async (value) => {
+  const navigationResult = await router.push({
     name: value,
   });
+  if (!navigationResult) {
+    active.value = value;
+  }
 };
 </script>
 

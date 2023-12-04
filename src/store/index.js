@@ -13,11 +13,13 @@ export const useUserInfoStore = defineStore("userStore", {
       userRegionName: "",
       linkRegionId: "",
       linkRegionName: "",
-      regionTag: "empty",
       loginStatus: false,
     };
   },
   actions: {
+    toogleLoginStatus(status) {
+      this.loginStatus = status;
+    },
     updateName(userName) {
       this.userName = userName;
     },
@@ -60,15 +62,7 @@ export const useUserInfoStore = defineStore("userStore", {
       this.userRegionName = "";
       this.linkRegionId = "";
       this.linkRegionName = "";
-      this.regionTag = "empty";
       this.loginStatus = false;
-    },
-    /**
-     * 
-     * @param {"empty" | "router" | "user"} tag 
-     */
-    setRegionTag(tag) {
-      this.regionTag = tag;
     },
   },
 });

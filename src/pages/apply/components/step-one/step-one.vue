@@ -48,7 +48,7 @@ defineExpose({
 });
 fetchReadMe();
 </script>
-<style scoped lang="scss">
+<style lang="scss">
 .pg-business-step-one {
   padding: 0 30px;
   .title {
@@ -60,7 +60,7 @@ fetchReadMe();
     box-sizing: border-box;
     overflow: hidden;
     img {
-      width: 100%;
+      width: 100% !important;
     }
   }
 }
