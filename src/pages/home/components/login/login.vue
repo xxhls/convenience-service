@@ -57,7 +57,7 @@
         </template>
       </van-field>
 
-      <van-field class="mb-80">
+      <!-- <van-field class="mb-80">
         <template #input>
           <van-radio-group v-model="readed">
             <van-radio :name="true">
@@ -68,7 +68,7 @@
             </van-radio>
           </van-radio-group>
         </template>
-      </van-field>
+      </van-field> -->
     </van-form>
     <van-button
       type="primary"
@@ -121,9 +121,10 @@ const handleCountdownFinish = () => {
   codeSended.value = false;
 };
 
-const readed = ref(false);
+// const readed = ref(false);
 const loginBtnDisabled = computed(() => {
-  return !(!sendCodeDisabled.value && loginModel.smsCode && readed.value);
+  // return !(!sendCodeDisabled.value && loginModel.smsCode && readed.value);
+  return !(!sendCodeDisabled.value && loginModel.smsCode);
 });
 const loginLoading = ref(false);
 const handleLogin = async () => {
