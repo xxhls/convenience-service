@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onBeforeMount } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { Region } from "@/components";
 import { useUserInfoStore } from "@/store";
@@ -61,6 +61,8 @@ watch(
 );
 
 const getLinkRegion = async () => {
+  console.log('查询地址');
+  console.log(route.query)
   const { regionId } = route.query;
   if (regionId) {
     const { code, data } = await queryRegionNameById(regionId);
@@ -117,8 +119,10 @@ const handleLoginSucess = (data) => {
   }
   memory && handleClick(memory);
 };
-getBusiness();
-getLinkRegion();
+onBeforeMount(() => {
+  getBusiness();
+  getLinkRegion();
+})
 </script>
 
 <style lang="scss" scoped>
