@@ -1,5 +1,5 @@
 <template>
-  <van-form class="templete-form">
+  <van-form v-if="!noParams && !noTemplete" class="templete-form">
     <van-field
       v-for="item in params"
       :key="item.id"
@@ -9,6 +9,8 @@
       :placeholder="item.description"
     />
   </van-form>
+  <van-empty v-if="noTemplete" image-size="250" description="暂未绑定模板" />
+  <van-empty v-if="noParams" image-size="250" description="该模板没有参数" />
 </template>
 
 <script setup>
@@ -32,10 +34,18 @@ const paramsHanlder = (data) => {
   applyInfo.paramsValue = paramsModel;
 };
 
+const noTemplete = ref(false);
+const noParams = ref(false);
+
 const getParams = async () => {
   const { code, data } = await getTempleteParams(applyInfo.businessId);
   if (code === 200) {
+    if (data.params.length === 0) {
+      noParams.value = true;
+    }
     paramsHanlder(data.params);
+  } else if (code === 30001) {
+    noTemplete.value = true;
   }
 };
 

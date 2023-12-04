@@ -100,20 +100,26 @@ const validate = async () => {
       applyInfo.fileIdList = fileId;
     } catch (error) {
       closeToast();
+      setToastDefaultOptions({ duration: 2000 });
       showFailToast(error);
       return Promise.reject();
     }
   }
+  setToastDefaultOptions({ duration: 0 });
   try {
     const { code } = await create(applyInfo);
-    if (code === 0) {
+    setToastDefaultOptions({ duration: 2000 });
+    if (code === 0) { 
+      closeToast();
       return Promise.resolve();
     } else {
+      setToastDefaultOptions({ duration: 2000 });
+      closeToast();
       return Promise.reject();
     }
   } finally {
+    setToastDefaultOptions({ duration: 2000 });
     closeToast();
-    resetToastDefaultOptions();
   }
 };
 
