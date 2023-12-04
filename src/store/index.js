@@ -13,6 +13,7 @@ export const useUserInfoStore = defineStore("userStore", {
       userRegionName: "",
       linkRegionId: "",
       linkRegionName: "",
+      regionTag: "empty",
     };
   },
   actions: {
@@ -45,6 +46,13 @@ export const useUserInfoStore = defineStore("userStore", {
       if (code === 0) {
         this.setUserInfo(data);
       }
+    },
+    /**
+     * 
+     * @param {"empty" | "router" | "user"} tag 
+     */
+    setRegionTag(tag) {
+      this.regionTag = tag;
     },
   },
 });

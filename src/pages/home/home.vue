@@ -65,6 +65,7 @@ const getLinkRegion = async () => {
   if (regionId) {
     const { code, data } = await queryRegionNameById(regionId);
     if (code === 0) {
+      userStore.setRegionTag("router");
       userStore.setLinkRegion({
         regionId,
         regionName: data,
@@ -107,6 +108,13 @@ const openRegister = () => {
 
 const handleLoginSucess = (data) => {
   userStore.setUserInfo(data);
+  if (userStore.regionTag === "empty") {
+    userStore.setRegionTag("user");
+    userStore.setLinkRegion({
+      regionId: data.regionId,
+      regionName: data.fullName,
+    });
+  }
   memory && handleClick(memory);
 };
 getBusiness();

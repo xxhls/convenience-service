@@ -161,6 +161,11 @@ const modifyRegion = async (region) => {
     });
     if (code === 0) {
       showSuccessToast("编辑成功");
+      console.log(userStore.regionTag)
+      if (userStore.regionTag === "user") {
+        console.log("更新LINK_REGION");
+        userStore.setLinkRegion(region);
+      }
       userStore.updateRegion(region);
     } else {
       showFailToast("编辑失败");
