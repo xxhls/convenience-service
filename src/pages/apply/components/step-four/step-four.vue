@@ -14,6 +14,7 @@
 <script setup>
 import { inject, ref, nextTick, computed } from "vue";
 import { nanoid } from "nanoid";
+import { setToastDefaultOptions, resetToastDefaultOptions } from 'vant';
 import { showLoadingToast, closeToast, showFailToast } from "vant";
 import { loadImage } from "@/services";
 import { getTempleteParams } from "../../services";
@@ -90,6 +91,7 @@ const createDocument = async () => {
  * 校验并且提交
  */
 const validate = async () => {
+  setToastDefaultOptions({ duration: 0 });
   showLoadingToast("提交中……");
   //如果是模板，要先生成文档
   if (applyInfo.fileSource === FILE_SOURCE.templete) {
@@ -111,6 +113,7 @@ const validate = async () => {
     }
   } finally {
     closeToast();
+    resetToastDefaultOptions();
   }
 };
 
