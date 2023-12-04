@@ -7,7 +7,15 @@ const routes = [
   {
     path: "/",
     name: "main",
-    redirect: "/home",
+    // redirect: "/home",
+    redirect: (to) => {
+      return {
+        name: "home",
+        query: {
+          ...to.query,
+        },
+      };
+    },
     component: Main,
     children: [
       {
@@ -59,6 +67,7 @@ const router = createRouter({
 const HOME_PAGE = "home";
 const whiteList = [HOME_PAGE];
 router.beforeEach(async (to, from) => {
+
   const store = useUserInfoStore();
   if (isLogin()) {
     if (store.hasGetInfo) {
