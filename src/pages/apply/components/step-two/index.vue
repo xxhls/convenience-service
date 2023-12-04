@@ -18,7 +18,9 @@
         label="手机号"
         label-align="top"
         placeholder="请输入手机号"
-        :rules="[{ required: true, message: '请输入手机号' }]"
+        :rules="[
+          { pattern: phoneReg, message: '请输入正确手机号'},
+          { required: true, message: '请输入手机号' }]"
       />
       <van-field
         v-model="formData.identityCard"
@@ -26,6 +28,9 @@
         label="身份证号"
         label-align="top"
         placeholder="请输入身份证号"
+        :rules="[
+          { pattern: idReg, message: '请输入正确身份证号' },
+          { required: false, message: '请输入身份证号' }]"
       />
 
       <van-field
@@ -68,26 +73,12 @@ const handleGetRegion = ({ regionId, regionName }) => {
 const validate = async () => {
   return formRef.value.validate();
 };
-const isFilled = () => {
-  const phoneReg = /^1[3-9]\d{9}$/;
-  const idReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-  if (formData.identityCard) {
-    return (
-      formData.applyUserName &&
-      phoneReg.test(formData.applyUserPhone) &&
-      formData.regionId &&
-      idReg.test(formData.identityCard)
-    );
-  }
-  return (
-    formData.applyUserName &&
-    phoneReg.test(formData.applyUserPhone) &&
-    formData.regionId
-  );
-};
+
+
+const phoneReg = /^1[3-9]\d{9}$/;
+const idReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)|(^$)/;
 defineExpose({
   validate,
-  isFilled
 });
 </script>
 

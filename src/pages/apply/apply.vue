@@ -164,13 +164,6 @@ const toNext = async () => {
   }
   const curModuleRef = refMap[currentStep.value];
   await curModuleRef.value?.validate();
-  if (currentStep.value === 2) {
-    const isFill = curModuleRef.value?.isFilled();
-    if (!isFill) {
-      showFailToast('请完善信息');
-      return;
-    };
-  }
   currentStep.value = currentStep.value + 1;
 };
 
