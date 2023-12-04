@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <div class="footer">
+    <div class="footer" v-if="detail.applyStatus === 2">
       <van-button type="danger" round block @click="handleReEdit"
         >重新编辑</van-button
       >

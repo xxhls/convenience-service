@@ -68,8 +68,26 @@ const handleGetRegion = ({ regionId, regionName }) => {
 const validate = async () => {
   return formRef.value.validate();
 };
+const isFilled = () => {
+  const phoneReg = /^1[3-9]\d{9}$/;
+  const idReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+  if (formData.identityCard) {
+    return (
+      formData.applyUserName &&
+      phoneReg.test(formData.applyUserPhone) &&
+      formData.regionId &&
+      idReg.test(formData.identityCard)
+    );
+  }
+  return (
+    formData.applyUserName &&
+    phoneReg.test(formData.applyUserPhone) &&
+    formData.regionId
+  );
+};
 defineExpose({
   validate,
+  isFilled
 });
 </script>
 
