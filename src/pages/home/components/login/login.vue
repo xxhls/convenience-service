@@ -103,7 +103,6 @@ const handleSendCode = async () => {
   try {
     codeLoading.value = true;
     console.log(loginModel.phoneNumber)
-    debugger
     const { code } = await sendCode(loginModel.phoneNumber);
     if (code === 20201) {
       codeSended.value = true;

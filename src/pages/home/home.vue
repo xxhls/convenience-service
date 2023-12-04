@@ -117,7 +117,7 @@ const handleLoginSucess = (data) => {
       regionName: data.fullName,
     });
   }
-  memory && handleClick(memory);
+  // memory && handleClick(memory);
 };
 onBeforeMount(() => {
   getBusiness();
