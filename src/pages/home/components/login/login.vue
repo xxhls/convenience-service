@@ -111,6 +111,8 @@ const handleSendCode = async () => {
     const { code } = await sendCode(loginModel.phoneNumber);
     if (code === 20201) {
       codeSended.value = true;
+    } else {
+      showFailToast("验证码发送失败");
     }
   } finally {
     codeLoading.value = false;
