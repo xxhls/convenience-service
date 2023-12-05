@@ -81,13 +81,26 @@ const statusIcon = {
   3: FinishIcon,
 };
 const detail = ref({});
+const applyImagesList = ref([]);
+const applyImagesListIndex = ref([]);
 const getDetail = async () => {
   const { code, data } = await fetchDetail(route.query.id);
   if (code === 0) {
     detail.value = data;
+    detail.value.applyFileViews.map(async (file, index) => {
+      const name = file.fileName;
+      const type = name.substring(name.lastIndexOf(".") + 1);
+      if (isImage(type)) {
+        applyImagesListIndex.value.push(index);
+        const blob = await downloadResource(file.fileId);
+        const url = window.URL.createObjectURL(blob);
+        applyImagesList.value.push(url);
+      }
+    });
     if (data.applyStatus === 3) {
       getSealImages(data.applyId);
     }
+
   }
 };
 
@@ -130,32 +143,17 @@ const downloadResource = async (fileId) => {
   return data;
 };
 
-// const applyFileViewsImages = computed(() => {
-//   return detail.applyFileViews.map(async (file) => {
-//     const blob = await downloadResource(file.fileId);
-//     const name = file.fileName;
-//     const type = name.substring(name.lastIndexOf(".") + 1);
-//     if (isImage(type)) {
-//       const url = window.URL.createObjectURL(blob);
-//       return url;
-//     } else {
-//       return "";
-//     }
-//   });
-// });
 const handleReview = async (file, index, tag) => {
   const blob = await downloadResource(file.fileId);
   const name = file.fileName;
   const type = name.substring(name.lastIndexOf(".") + 1);
   if (isImage(type)) {
     const url = window.URL.createObjectURL(blob);
-    // if (tag === "preview") {
-    //   showImagePreview({
-    //     images: applyFileViewsImages.value,
-    //     startPosition: index,
-    //   });
-    // }
-    showImagePreview([url]);
+    // showImagePreview([url]);
+    showImagePreview({
+      images: applyImagesList.value,
+      startPosition: applyImagesListIndex.value.findIndex(value => value == index),
+    });
   } else {
     router.push({
       name: "pdfPreviewer",
