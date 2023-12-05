@@ -13,10 +13,12 @@
         />
       </div>
     </div>
+    <van-overlay :show="show" />
   </div>
 </template>
 
 <script setup>
+import { Overlay } from 'vant';
 import { inject, ref, nextTick, computed } from "vue";
 import { nanoid } from "nanoid";
 import {
@@ -112,11 +114,13 @@ const createDocument = async () => {
 /**
  * 校验并且提交
  */
+const show = ref(false);
 const validate = async () => {
   showLoadingToast({
     duration: 0,
     message: "提交中……",
   });
+  show.value = true;
   //如果是模板，要先生成文档
   if (applyInfo.fileSource === FILE_SOURCE.templete) {
     try {
@@ -133,6 +137,7 @@ const validate = async () => {
   }
   try {
     const { code } = await create(applyInfo);
+    show.value = false;
     if (code === 0) {
       return Promise.resolve();
     } else {
