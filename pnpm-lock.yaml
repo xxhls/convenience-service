@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@vue-office/pdf':
+    specifier: ^1.5.5
+    version: 1.5.5(vue-demi@0.13.11)(vue@3.3.9)
   axios:
     specifier: ^1.6.2
     version: 1.6.2
@@ -26,6 +29,9 @@ dependencies:
   vue:
     specifier: ^3.3.8
     version: 3.3.9
+  vue-demi:
+    specifier: 0.13.11
+    version: 0.13.11(vue@3.3.9)
   vue-router:
     specifier: '4'
     version: 4.2.5(vue@3.3.9)
@@ -342,6 +348,21 @@ packages:
       vite: 4.4.5(sass@1.69.5)
       vue: 3.3.9
     dev: true
+
+  /@vue-office/pdf@1.5.5(vue-demi@0.13.11)(vue@3.3.9):
+    resolution: {integrity: sha512-WjybKkhKl0zKtmtxTC7Z0ws6cZCjWtZ96KowZ1JgNClUrXz8Y3oT69c3kJzVL4RnHnz5ApMUaa4gTrhb4VreQw==}
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.7.1
+      vue: ^2.0.0 || >=3.0.0
+      vue-demi: ^0.13.11
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.3.9
+      vue-demi: 0.13.11(vue@3.3.9)
+    dev: false
 
   /@vue/compiler-core@3.3.9:
     resolution: {integrity: sha512-+/Lf68Vr/nFBA6ol4xOtJrW+BQWv3QWKfRwGSm70jtXwfhZNF4R/eRgyVJYoxFRhdCTk/F6g99BP0ffPgZihfQ==}
@@ -913,6 +934,21 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
+
+  /vue-demi@0.13.11(vue@3.3.9):
+    resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.3.9
+    dev: false
 
   /vue-demi@0.14.6(vue@3.3.9):
     resolution: {integrity: sha512-8QA7wrYSHKaYgUxDA5ZC24w+eHm3sYCbp0EzcDwKqN3p6HqtTCGR/GVsPyZW92unff4UlcSh++lmqDWN3ZIq4w==}

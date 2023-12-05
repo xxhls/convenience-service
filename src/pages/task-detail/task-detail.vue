@@ -138,14 +138,10 @@ const handleReview = async (file) => {
     const url = window.URL.createObjectURL(blob);
     showImagePreview([url]);
   } else {
-    const url = window.URL.createObjectURL(
-      new Blob([blob], { type: "application/pdf" })
-    );
-
     router.push({
       name: "pdfPreviewer",
       query: {
-        pdfUrl: url,
+        fileId: file.fileId,
       },
     });
   }

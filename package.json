@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vue-office/pdf": "^1.5.5",
     "axios": "^1.6.2",
     "js-file-download": "^0.4.12",
     "jsencrypt": "^3.3.2",
@@ -16,6 +17,7 @@
     "pinia": "^2.1.7",
     "vant": "^4.8.0",
     "vue": "^3.3.8",
+    "vue-demi": "0.13.11",
     "vue-router": "4"
   },
   "devDependencies": {
