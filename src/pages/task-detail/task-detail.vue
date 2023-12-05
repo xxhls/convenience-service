@@ -25,10 +25,10 @@
       </div>
       <div class="py-20 van-hairline--bottom">
         <div>盖章材料：</div>
-        <div v-for="item in detail.applyFileViews" class="file-item">
+        <div v-for="(item, index) in detail.applyFileViews" class="file-item">
           <span class="file-name">{{ item.fileName }}</span>
           <van-space :size="15" class="op-box">
-            <span class="op" @click="handleReview(item)">预览</span>
+            <span class="op" @click="handleReview(item, index, 'preview')">预览</span>
             <span class="op" @click="handleDownload(item)">下载</span>
           </van-space>
         </div>
@@ -48,7 +48,7 @@
             v-for="(img, index) in sealImages"
             :key="index"
             :src="img.small"
-            @click="handlePreview(img, index)"
+            @click="handlePreview(img, index, 'seal')"
           />
         </div>
         <van-empty v-else description="暂无盖章图片" />
@@ -63,7 +63,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import fileDownload from "js-file-download";
 import { showImagePreview } from "vant";
@@ -130,12 +130,31 @@ const downloadResource = async (fileId) => {
   return data;
 };
 
-const handleReview = async (file) => {
+// const applyFileViewsImages = computed(() => {
+//   return detail.applyFileViews.map(async (file) => {
+//     const blob = await downloadResource(file.fileId);
+//     const name = file.fileName;
+//     const type = name.substring(name.lastIndexOf(".") + 1);
+//     if (isImage(type)) {
+//       const url = window.URL.createObjectURL(blob);
+//       return url;
+//     } else {
+//       return "";
+//     }
+//   });
+// });
+const handleReview = async (file, index, tag) => {
   const blob = await downloadResource(file.fileId);
   const name = file.fileName;
   const type = name.substring(name.lastIndexOf(".") + 1);
   if (isImage(type)) {
     const url = window.URL.createObjectURL(blob);
+    // if (tag === "preview") {
+    //   showImagePreview({
+    //     images: applyFileViewsImages.value,
+    //     startPosition: index,
+    //   });
+    // }
     showImagePreview([url]);
   } else {
     router.push({
@@ -234,6 +253,18 @@ getDetail();
   gap: 20px;
   img {
     max-width: 100%;
+  }
+}
+
+</style>
+
+<style lang="scss">
+.van-image-preview__swipe {
+  &>div {
+    width: 1125px !important;;
+    &>div {
+      width: 100vw !important;;
+    }
   }
 }
 </style>
