@@ -54,6 +54,7 @@ import {
   StepFive,
 } from "./components";
 import { FILE_SOURCE, APPLY_INFO_INJECT } from "./context";
+import { showConfirmDialog } from 'vant';
 
 const route = useRoute();
 const router = useRouter();
@@ -157,7 +158,20 @@ const refMap = {
   5: ref(null),
 };
 const handleGoback = () => {
-  router.go(-1);
+  showConfirmDialog({
+    theme: 'round-button',
+    className: 'dialog-apply',
+    message:
+      '是否确认返回首页',
+  })
+  .then(() => {
+    // on confirm
+    router.go(-1);
+  })
+  .catch(() => {
+    // on cancel
+    return;
+  });
 };
 /** 下一步 */
 const toNext = async () => {
@@ -192,6 +206,27 @@ const toNext = async () => {
   gap: 10px;
   .btn-item {
     flex: 1;
+  }
+}
+</style>
+
+<style lang="scss">
+.dialog-apply {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  .van-dialog__content {
+    height: 100px;
+    line-height: 100px;
+    font-size: 16px;
+  }
+  .van-action-bar {
+    width: 180px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
 }
 </style>
