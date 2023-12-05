@@ -176,7 +176,7 @@ const handleGoback = () => {
 /** 下一步 */
 const toNext = async () => {
   if (currentStep.value === 5) {
-    handleGoback();
+    router.go(-1);
   }
   const curModuleRef = refMap[currentStep.value];
   await curModuleRef.value?.validate();

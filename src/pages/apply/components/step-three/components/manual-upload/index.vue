@@ -51,8 +51,11 @@ const handleUploadDelete = async (file) => {
  * 加载文件
  */
 const init = () => {
-  applyInfo.uploadFiles = [];
+  // applyInfo.uploadFiles = [];
   if (FILE_SOURCE.upload === applyInfo.fileSource) {
+    if (applyInfo.fileIdList.length !== 0) {
+      return;
+    }
     applyInfo.fileIdList?.map(async (item) => {
       const data = await loadImage(item.fileId);
       const url = window.URL.createObjectURL(data);
