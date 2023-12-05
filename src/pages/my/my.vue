@@ -11,7 +11,6 @@
         </div>
       </div>
     </div>
-    <Region :region-name="regionName"></Region>
     <div class="num-list">
       <van-cell
         is-link
@@ -56,7 +55,6 @@ const router = useRouter();
 const store = useUserInfoStore();
 const userName = computed(() => store.userName);
 const phone = computed(() => store.userPhone);
-const regionName = computed(() => store.userRegionName);
 
 const nums = reactive([
   {
