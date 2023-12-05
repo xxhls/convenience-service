@@ -41,7 +41,7 @@
       v-model="userName"
       label="真实姓名"
       size="large"
-      placeholder="请输入文本"
+      placeholder="请输入姓名"
     />
   </popup-info>
 

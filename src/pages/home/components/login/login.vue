@@ -56,19 +56,6 @@
           />
         </template>
       </van-field>
-
-      <!-- <van-field class="mb-80">
-        <template #input>
-          <van-radio-group v-model="readed">
-            <van-radio :name="true">
-              <div class="readme">
-                <span>我已阅读并同意</span>
-                <span class="weight">《隐私协议》</span>
-              </div>
-            </van-radio>
-          </van-radio-group>
-        </template>
-      </van-field> -->
     </van-form>
     <van-button
       type="primary"
