@@ -38,3 +38,13 @@ export const fetchDetail = (applyId) => {
     method: "get",
   });
 };
+
+export const deleteFileById = (id) => {
+  return axiosIns.request({
+    url: "/deleteFile",
+    method: "POST",
+    data: {
+      id,
+    },
+  });
+};

@@ -23,7 +23,7 @@
           </div>
           <div class="task-time mb-40">
             <span>申请时间：</span>
-            <span>{{ item.applyDate }}</span>
+            <span>{{ formatDate(item.applyDate) }}</span>
           </div>
           <div class="van-hairline--bottom"></div>
         </div>
@@ -59,6 +59,16 @@ const handleViewDetail = (task) => {
       id: task.id,
     },
   });
+};
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return `${date.getFullYear()}-${
+    date.getMonth() + 1
+  }-${date.getDate()}:${date.getHours()}:${String(date.getMinutes()).padStart(
+    2,
+    "0"
+  )}:${String(date.getSeconds()).padStart(2, "0")}`;
 };
 
 const handleGoback = () => {

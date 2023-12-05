@@ -10,6 +10,7 @@ export const create = (data) => {
     url: "addApply",
     data,
     method: "post",
+    timeout: 50 * 1000,
   });
 };
 
@@ -22,5 +23,6 @@ export const generateDoc = (data) => {
     url: "/createDocument",
     method: "POST",
     data: [data],
+    timeout: 50 * 1000,
   });
 };

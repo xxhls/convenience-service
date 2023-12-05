@@ -1,3 +1,5 @@
+import { removeToken } from "@/utils";
+import router from "@/router";
 import { createHttpRequestInstance } from "./request";
 
 /**
@@ -7,6 +9,12 @@ import { createHttpRequestInstance } from "./request";
  */
 const repInterceptor = (response) => {
   const { config, data } = response;
+  if (data?.code === 20022) {
+    removeToken();
+    router.push({
+      name: "home",
+    });
+  }
   if (config.settings?.nativeResponse) return response;
   return data;
 };

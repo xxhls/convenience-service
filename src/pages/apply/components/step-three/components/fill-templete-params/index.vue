@@ -16,7 +16,7 @@
 <script setup>
 import { inject, ref } from "vue";
 import { getTempleteParams, fetchFilledParamValues } from "./services";
-import { APPLY_INFO_INJECT } from "../../../../context";
+import { APPLY_INFO_INJECT, FILE_SOURCE } from "../../../../context";
 
 const params = ref([]);
 const applyInfo = inject(APPLY_INFO_INJECT);
@@ -26,12 +26,17 @@ const applyInfo = inject(APPLY_INFO_INJECT);
  * @param {*} params
  */
 const paramsHanlder = (data) => {
-  params.value = data;
-  const paramsModel = {};
-  for (let item of data) {
-    paramsModel[item.id] = item.value;
+  if (data?.length === 0) {
+    noParams.value = true;
+  } else {
+    params.value = data;
+    if (!applyInfo.paramsValue) {
+      applyInfo.paramsValue = data?.reduce((pre, cur) => {
+        pre[cur.id] = cur.value;
+        return pre;
+      }, {});
+    }
   }
-  applyInfo.paramsValue = paramsModel;
 };
 
 const noTemplete = ref(false);
@@ -40,9 +45,6 @@ const noParams = ref(false);
 const getParams = async () => {
   const { code, data } = await getTempleteParams(applyInfo.businessId);
   if (code === 200) {
-    if (data.params.length === 0) {
-      noParams.value = true;
-    }
     paramsHanlder(data.params);
   } else if (code === 30001) {
     noTemplete.value = true;
@@ -60,9 +62,10 @@ const getFilledValues = async (fileId) => {
 };
 
 const init = async () => {
-  if (applyInfo.fileIdList?.length > 0) {
-    const first = applyInfo.fileIdList[0];
-    getFilledValues(first);
+  const { fileIdList, fileSource } = applyInfo;
+  if (fileIdList?.length > 0 && fileSource === FILE_SOURCE.templete) {
+    const first = fileIdList[0];
+    getFilledValues(first.fileId);
   } else {
     getParams();
   }

@@ -30,7 +30,7 @@
     </div>
     <div class="footer">
       <van-button type="danger" round block @click="deleteLogin">
-        注销登录
+        退出登录
       </van-button>
     </div>
   </div>
@@ -112,16 +112,16 @@ const handleGotoList = (item) => {
   });
 };
 
-const deleteLogin = () =>{
+const deleteLogin = () => {
   removeToken();
   router.push({
     name: "home",
     query: {
       regionId: store.linkRegionId,
-    }
+    },
   });
   store.resetUserInfo();
-}
+};
 
 getTasks();
 </script>

@@ -4,8 +4,13 @@
       <div v-if="html" v-html="html"></div>
     </div>
     <div v-else>
-      <div class="img-box" >
-        <img v-for="(item, index) in imageList" :key="index" :src="item" @click="previewImage(item)"/>
+      <div class="img-box">
+        <img
+          v-for="(item, index) in imageList"
+          :key="index"
+          :src="item"
+          @click="previewImage(item)"
+        />
       </div>
     </div>
   </div>
@@ -14,9 +19,13 @@
 <script setup>
 import { inject, ref, nextTick, computed } from "vue";
 import { nanoid } from "nanoid";
-import { setToastDefaultOptions, resetToastDefaultOptions } from 'vant';
-import { showLoadingToast, closeToast, showFailToast, showImagePreview } from "vant";
-import { loadImage } from "@/services";
+import {
+  showLoadingToast,
+  closeToast,
+  showFailToast,
+  showImagePreview,
+} from "vant";
+import { loadImage, deleteFileById } from "@/services";
 import { getTempleteParams } from "../../services";
 import { FILE_SOURCE, APPLY_INFO_INJECT } from "../../context";
 import { create, generateDoc } from "./services";
@@ -58,9 +67,9 @@ const fillParamsValue = (params) => {
  */
 const imageList = ref([]);
 const getImageList = () => {
-  const fileList = applyInfo.fileIdList;
+  const fileList = applyInfo.uploadFiles;
   fileList?.map(async (item) => {
-    const data = await loadImage(item);
+    const data = await loadImage(item.serverId);
     const url = window.URL.createObjectURL(new Blob([data]));
     imageList.value.push(url);
   });
@@ -68,7 +77,16 @@ const getImageList = () => {
 
 const previewImage = (url) => {
   showImagePreview([url]);
-}
+};
+
+/**
+ * 清理手动上传的文件
+ */
+const clearManualFiles = () => {
+  for (let item of applyInfo.uploadFiles) {
+    deleteFileById(item.serverId);
+  }
+};
 
 /**
  * 生成文档
@@ -95,34 +113,32 @@ const createDocument = async () => {
  * 校验并且提交
  */
 const validate = async () => {
-  setToastDefaultOptions({ duration: 0 });
-  showLoadingToast("提交中……");
+  showLoadingToast({
+    duration: 0,
+    message: "提交中……",
+  });
   //如果是模板，要先生成文档
   if (applyInfo.fileSource === FILE_SOURCE.templete) {
     try {
+      clearManualFiles();
       const fileId = await createDocument();
       applyInfo.fileIdList = fileId;
     } catch (error) {
       closeToast();
-      setToastDefaultOptions({ duration: 2000 });
       showFailToast(error);
       return Promise.reject();
     }
+  } else {
+    applyInfo.fileIdList = applyInfo.uploadFiles?.map((item) => item.serverId);
   }
-  setToastDefaultOptions({ duration: 0 });
   try {
     const { code } = await create(applyInfo);
-    setToastDefaultOptions({ duration: 2000 });
-    if (code === 0) { 
-      closeToast();
+    if (code === 0) {
       return Promise.resolve();
     } else {
-      setToastDefaultOptions({ duration: 2000 });
-      closeToast();
       return Promise.reject();
     }
   } finally {
-    setToastDefaultOptions({ duration: 2000 });
     closeToast();
   }
 };
@@ -138,13 +154,12 @@ init();
   padding: 0 40px 20px 40px;
 }
 .img-box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   img {
-    max-width: 120px;
+    max-width: 100%;
     display: block;
-    margin-top: 20px;
   }
 }
 </style>

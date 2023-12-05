@@ -54,7 +54,6 @@ import {
   StepFive,
 } from "./components";
 import { FILE_SOURCE, APPLY_INFO_INJECT } from "./context";
-import { showFailToast } from 'vant';
 
 const route = useRoute();
 const router = useRouter();
@@ -71,6 +70,7 @@ const baseInfo = reactive({
   regionId: "",
   regionName: "",
   id: "",
+  uploadFiles: [], //手动上传的文件
   fileIdList: [],
   fileSource: FILE_SOURCE.upload,
 });
@@ -104,8 +104,9 @@ const getUserInfo = async () => {
   baseInfo.applyUserName = userInfoStore.userName;
   baseInfo.applyUserPhone = userInfoStore.userPhone;
   baseInfo.identityCard = userInfoStore.userIdentityCard;
-  baseInfo.regionId = userInfoStore.userRegionId;
-  baseInfo.regionName = userInfoStore.userRegionName;
+  baseInfo.regionId = userInfoStore.linkRegionId || userInfoStore.userRegionId;
+  baseInfo.regionName =
+    userInfoStore.linkRegionName || userInfoStore.userRegionName;
 };
 
 const getApplyDetail = async (id) => {
@@ -128,8 +129,9 @@ const getApplyDetail = async (id) => {
  */
 const handleApplyFiles = (files) => {
   if (files.length === 0) return;
-  baseInfo.fileIdList = files?.map((item) => item.fileId);
-  baseInfo.fileSource = files[0].uploadType;
+  const uploadType = files[0].uploadType;
+  baseInfo.fileSource = uploadType;
+  baseInfo.fileIdList = files;
 };
 
 /** 当前步骤 */
