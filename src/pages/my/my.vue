@@ -51,6 +51,7 @@ import {
   iconDone,
 } from "./images";
 import { fetchTaskNums } from "./services";
+import { showSuccessToast } from 'vant';
 const router = useRouter();
 const store = useUserInfoStore();
 const userName = computed(() => store.userName);
@@ -121,6 +122,7 @@ const deleteLogin = () => {
     },
   });
   store.resetUserInfo();
+  showSuccessToast("退出成功");
 };
 
 getTasks();

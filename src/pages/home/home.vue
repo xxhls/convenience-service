@@ -45,6 +45,7 @@ import { queryRegionNameById } from "@/services";
 import { Banner, BusinessIcon, Login, Register } from "./components";
 import { fetchBusiness } from "./services";
 import { computed } from "vue";
+import { showSuccessToast } from 'vant';
 
 const router = useRouter();
 const route = useRoute();
@@ -92,6 +93,7 @@ const openRegister = () => {
 };
 
 const handleLoginSucess = (data) => {
+  showSuccessToast("登录成功");
   userStore.setUserInfo(data);
 };
 onBeforeMount(() => {
