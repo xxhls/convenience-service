@@ -9,7 +9,7 @@
           v-for="(item, index) in imageList"
           :key="index"
           :src="item"
-          @click="previewImage(item)"
+          @click="previewImage(index)"
         />
       </div>
     </div>
@@ -77,8 +77,12 @@ const getImageList = () => {
   });
 };
 
-const previewImage = (url) => {
-  showImagePreview([url]);
+const previewImage = (idx) => {
+  // showImagePreview([url]);
+  showImagePreview({
+    images: imageList.value,
+    startPosition: idx,
+  });
 };
 
 /**
