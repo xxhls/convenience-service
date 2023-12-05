@@ -1,5 +1,5 @@
 <template>
-  <van-form v-if="!noParams && !noTemplete" class="templete-form">
+  <van-form ref="formRef" v-if="!noParams && !noTemplete" class="templete-form">
     <van-field
       v-for="item in params"
       :key="item.id"
@@ -7,6 +7,7 @@
       size="large"
       :label="item.name"
       :placeholder="item.description"
+      :rules="[{ required: true, message: '请填写必备参数' }]"
     />
   </van-form>
   <van-empty v-if="noTemplete" image-size="250" description="暂未绑定模板" />
@@ -18,6 +19,7 @@ import { inject, ref } from "vue";
 import { getTempleteParams, fetchFilledParamValues } from "./services";
 import { APPLY_INFO_INJECT, FILE_SOURCE } from "../../../../context";
 
+const formRef = ref();
 const params = ref([]);
 const applyInfo = inject(APPLY_INFO_INJECT);
 
@@ -71,6 +73,19 @@ const init = async () => {
   }
 };
 init();
+
+const validate = async () => {
+  try {
+    await formRef.value.validate();
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject();
+  }
+};
+
+defineExpose({
+  validate,
+});
 </script>
 <style lang="scss" scoped>
 .templete-form {

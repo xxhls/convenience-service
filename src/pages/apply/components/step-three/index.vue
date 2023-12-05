@@ -13,13 +13,14 @@
         :name="FILE_SOURCE.templete"
         :lazy-render="false"
       >
-        <fill-templete-params> </fill-templete-params>
+        <fill-templete-params ref="FileTempleteParamsRef"> </fill-templete-params>
       </van-collapse-item>
     </van-collapse>
   </div>
 </template>
 
 <script setup>
+import { ref } from "vue";
 import { computed, inject } from "vue";
 import { showFailToast } from "vant";
 import { FILE_SOURCE, APPLY_INFO_INJECT } from "../../context";
@@ -28,6 +29,8 @@ import { FillTempleteParams, ManualUpload } from "./components";
 const applyInfo = inject(APPLY_INFO_INJECT);
 const fileSource = computed(() => applyInfo.fileSource);
 
+const FileTempleteParamsRef = ref(null);
+
 const validate = () => {
   if (fileSource.value === FILE_SOURCE.upload) {
     if (applyInfo.uploadFiles?.length === 0) {
@@ -35,6 +38,9 @@ const validate = () => {
       return Promise.reject();
     }
     return Promise.resolve();
+  }
+  if (fileSource.value === FILE_SOURCE.templete) {
+    return FileTempleteParamsRef.value.validate();
   }
   return Promise.resolve();
 };
