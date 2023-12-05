@@ -8,8 +8,12 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { download, fetchSealImages, loadSealImage } from "./service";
+import { download } from "./service";
 import VueOfficePdf from '@vue-office/pdf';
+import {
+  showLoadingToast,
+  closeToast,
+} from "vant";
 
 /**
  * 下载资源
@@ -26,9 +30,14 @@ const fileId = route.query.fileId;
 
 const src = ref("");
 onMounted(async () => {
+  showLoadingToast({
+    duration: 0,
+    message: "加载PDF中……",
+  });
   const blob = await downloadResource(fileId);
   console.log(blob);
   src.value = blob;
+  closeToast();
 });
 
 const handleGoback = () => {
