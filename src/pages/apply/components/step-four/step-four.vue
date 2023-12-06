@@ -1,7 +1,7 @@
 <template>
   <div class="preview-box">
     <div v-if="isTemplete">
-      <div v-if="html" v-html="html"></div>
+      <div v-if="html" v-html="html" ref="htmlRef"></div>
     </div>
     <div v-else>
       <div class="img-box">
@@ -59,6 +59,7 @@ const fillParamsValue = (params) => {
     for (let item of params) {
       const target = document.getElementById(item.id);
       target.setAttribute("value", applyInfo.paramsValue[item.id]);
+      target.setAttribute("data-value", applyInfo.paramsValue[item.id]);
       target.setAttribute("readonly", true);
     }
   });
@@ -94,6 +95,7 @@ const clearManualFiles = () => {
   }
 };
 
+const htmlRef = ref(null);
 /**
  * 生成文档
  */
@@ -107,6 +109,7 @@ const createDocument = async () => {
   templeteMeta.params?.map((item) => {
     item.value = applyInfo.paramsValue[item.id];
   });
+  templeteMeta.html = htmlRef.value.innerHTML;
   const { code, data, msg } = await generateDoc(templeteMeta);
   if (code === 200) {
     return Promise.resolve(data);
