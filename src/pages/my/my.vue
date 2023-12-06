@@ -11,6 +11,7 @@
         </div>
       </div>
     </div>
+    <div class="my-business">我的办理</div>
     <div class="num-list">
       <van-cell
         is-link
@@ -160,6 +161,13 @@ getTasks();
     }
     padding-left: 15px;
   }
+}
+.my-business {
+  font-size: 17px;
+  font-weight: 400;
+  color: #000;
+  padding: 20px;
+  padding-bottom: 0;
 }
 .num-list {
   padding: 20px 20px;
