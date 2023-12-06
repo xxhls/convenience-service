@@ -91,10 +91,15 @@ const showRegister = ref(false);
 const openRegister = () => {
   showRegister.value = true;
 };
+const closeRegister = () => {
+  showRegister.value = false;
+};
 
 const handleLoginSucess = (data) => {
   showSuccessToast("登录成功");
   userStore.setUserInfo(data);
+  closeRegister();
+  userStore.toogleLoginStatus(false);
 };
 onBeforeMount(() => {
   getBusiness();

@@ -125,7 +125,7 @@ const handleLogin = async () => {
       setToken(token);
       handleClose();
       emit("login:success", user);
-    } else if (code === 2002) {
+    } else if (code === 20020) {
       handleClose();
       emit("login:register");
     } else if (code === 20016) {
