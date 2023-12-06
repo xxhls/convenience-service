@@ -115,7 +115,7 @@ const getSealImages = async (applyId) => {
     data.map(async (item) => {
       const blob = await loadSealImage(item.smallUrl);
       const url = window.URL.createObjectURL(blob);
-      sealImagesBig.value.push(bigUrl);
+      sealImagesBig.value.push(item.bigUrl);
       sealImages.value.push({
         small: url,
         big: "",
