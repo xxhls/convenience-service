@@ -21,6 +21,7 @@ export const loadImage = (imageId, type = "S") => {
       type,
     },
     responseType: "blob",
+    timeout: 0,
   });
 };
 

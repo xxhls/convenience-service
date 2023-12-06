@@ -136,6 +136,7 @@ const validate = async () => {
       applyInfo.fileIdList = fileId;
     } catch (error) {
       closeToast();
+      show.value = false;
       showFailToast(error);
       return Promise.reject();
     }
@@ -144,13 +145,13 @@ const validate = async () => {
   }
   try {
     const { code } = await create(applyInfo);
-    show.value = false;
     if (code === 0) {
       return Promise.resolve();
     } else {
       return Promise.reject();
     }
   } finally {
+    show.value = false;
     closeToast();
   }
 };
