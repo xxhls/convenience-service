@@ -167,7 +167,7 @@ const handleGoback = () => {
   showConfirmDialog({
     theme: "round-button",
     className: "dialog-apply",
-    message: "是否确认返回首页",
+    message: "返回后您所填写的基本信息将会被清空，是否继续返回至首页",
   })
     .then(() => {
       // on confirm
@@ -217,18 +217,19 @@ const toNext = async () => {
 
 <style lang="scss">
 .dialog-apply {
-  width: 200px;
+  // width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px;
   .van-dialog__content {
-    height: 100px;
-    line-height: 100px;
+    // height: 100px;
+    line-height: 50px;
     font-size: 16px;
   }
   .van-action-bar {
-    width: 180px;
+    // width: 200px;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
