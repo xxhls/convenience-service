@@ -58,6 +58,9 @@ const fillParamsValue = (params) => {
   nextTick(() => {
     for (let item of params) {
       const target = document.getElementById(item.id);
+      console.log(target);
+      // target.style.width = "400px";
+      target.setAttribute("maxlength", 10000000000000);
       target.setAttribute("value", applyInfo.paramsValue[item.id]);
       target.setAttribute("data-value", applyInfo.paramsValue[item.id]);
       target.setAttribute("readonly", true);

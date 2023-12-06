@@ -40,7 +40,7 @@
         </template>
         <template #button>
           <van-button
-            v-if="!codeSended"
+            v-if="!codeSended && !busy"
             :disabled="sendCodeDisabled"
             size="small"
             type="primary"
@@ -92,12 +92,19 @@ const codeLoading = ref(false);
 const sendCodeDisabled = computed(() => {
   return !phonePattern.test(loginModel.phoneNumber);
 });
+const busy = ref(false);
 const handleSendCode = async () => {
   try {
     codeLoading.value = true;
     const { code } = await sendCode(loginModel.phoneNumber);
     if (code === 20201) {
       codeSended.value = true;
+    } else if (code === 20209) {
+      showFailToast("短信发送请求太频繁，请稍后再试");
+      busy.value = true;
+      setTimeout(() => {
+        busy.value = false;
+      }, 60 * 1000);
     } else {
       showFailToast("验证码发送失败");
     }
@@ -125,7 +132,7 @@ const handleLogin = async () => {
       setToken(token);
       handleClose();
       emit("login:success", user);
-    } else if (code === 20020) {
+    } else if (code === 2002) {
       handleClose();
       emit("login:register");
     } else if (code === 20016) {
