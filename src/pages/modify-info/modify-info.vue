@@ -18,9 +18,11 @@
   />
 
   <van-cell
+    is-link
     title="身份证"
     :value="userStore.userIdentityCard"
     class="first-cell"
+    @click="handleUpdateIdentityCard"
   />
 
   <van-cell
@@ -59,6 +61,20 @@
     />
   </popup-info>
 
+  <popup-info
+    v-model:value="showIdentityCardPopup"
+    title="修改身份证号"
+    :loading="identityCardLoading"
+    @sure="modifyIdentityCard"
+  >
+    <van-field
+      size="large"
+      v-model="identityCard"
+      label="身份证号"
+      placeholder="请输入身份证号"
+    />
+  </popup-info>
+
   <region-picker
     v-model:value="showRegionPicker"
     @change="modifyRegion"
@@ -72,7 +88,7 @@ import { useRouter } from "vue-router";
 import { useUserInfoStore } from "@/store";
 import { RegionPicker } from "@/components";
 import { PopupInfo } from "./components";
-import { updateUserName, updatePhone, updateRegion } from "./services";
+import { updateUserName, updatePhone, updateRegion, updateIdentityCard } from "./services";
 
 const userStore = useUserInfoStore();
 /**
@@ -143,6 +159,37 @@ const modifyPhone = async () => {
     }
   } finally {
     phoneLoading.value = false;
+  }
+};
+
+/**
+ * =======更新身份证=========
+ */
+const identityCard = ref(userStore.userIdentityCard);
+const showIdentityCardPopup = ref(false);
+const identityCardLoading = ref(false);
+const handleUpdateIdentityCard = () => {
+  showIdentityCardPopup.value = true;
+};
+const modifyIdentityCard = async () => {
+  if (!identityCard.value) {
+    return;
+  }
+  try {
+    identityCardLoading.value = true;
+    const { code, msg } = await updateIdentityCard({
+      id: userId.value,
+      identityCard: identityCard.value,
+    });
+    if (code === 0) {
+      showIdentityCardPopup.value = false;
+      showSuccessToast("编辑成功");
+      userStore.updateIdentityCard(identityCard.value);
+    } else {
+      showFailToast("编辑失败");
+    }
+  } finally {
+    identityCardLoading.value = false;
   }
 };
 

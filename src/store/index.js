@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { fetchUserInfo } from "@/services";
+import { updateIdentityCard } from './../pages/modify-info/services';
 
 export const useUserInfoStore = defineStore("userStore", {
   state: () => {
@@ -29,6 +30,9 @@ export const useUserInfoStore = defineStore("userStore", {
     updateRegion(region) {
       this.userRegionId = region.regionId;
       this.userRegionName = region.regionName;
+    },
+    updateIdentityCard(identityCard) {
+      this.userIdentityCard = identityCard;
     },
     updateLoginStatus(status) {
       this.loginStatus = status;

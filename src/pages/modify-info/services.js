@@ -33,6 +33,18 @@ export const updatePhone = async ({ id, userPhone }) => {
   });
 };
 
+export const updateIdentityCard = async ({ id, identityCard }) => {
+  const encryptIdentity = await encrypt(identityCard);
+  return axiosIns.request({
+    url: "/updateIdentityCard",
+    data: {
+      id,
+      identityCard: encryptIdentity,
+    },
+    method: "POST",
+  });
+};
+
 export const updateRegion = ({ id, regionId }) => {
   return axiosIns.request({
     url: "/updateUserRegion",
