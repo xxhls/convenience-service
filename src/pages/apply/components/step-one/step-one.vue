@@ -40,7 +40,7 @@ const isRead = ref(false);
 
 const validate = () => {
   if (isRead.value) return Promise.resolve();
-  showFailToast("请阅读业务办理须知");
+  showFailToast("请阅读业务办理需知，并勾选“我已知悉以上内容”");
   return Promise.reject();
 };
 defineExpose({
