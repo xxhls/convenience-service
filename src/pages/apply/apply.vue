@@ -226,13 +226,21 @@ const toNext = async () => {
     // height: 100px;
     line-height: 50px;
     font-size: 16px;
+    text-align: center;
   }
   .van-action-bar {
     // width: 200px;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    button {
+      background-color: transparent;
+      border-color: transparent;
+      color: black;
+    }
+    button:nth-child(2) {
+      color: #CC1D1D;
+    }
   }
 }
 </style>
