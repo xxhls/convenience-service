@@ -108,14 +108,12 @@ const images = ref([]);
  * 获取盖章文件
  */
 const sealImages = ref([]); // 盖章文件
-const sealImagesBig = ref([]); // 盖章文件大图
 const getSealImages = async (applyId) => {
   const { code, data } = await fetchSealImages(applyId);
   if (code === 0) {
     data.map(async (item) => {
       const blob = await loadSealImage(item.smallUrl);
       const url = window.URL.createObjectURL(blob);
-      sealImagesBig.value.push(item.bigUrl);
       sealImages.value.push({
         small: url,
         big: "",
