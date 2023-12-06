@@ -59,6 +59,14 @@
         >重新编辑</van-button
       >
     </div>
+    <van-image-preview 
+    v-model:show="show" 
+    :images="images" 
+    :startPosition="currentIndex"
+    @change="onChange"
+    >
+      <template v-slot:index>第{{ currentIndex + 1 }}页</template>
+    </van-image-preview>
   </div>
 </template>
 
@@ -87,22 +95,24 @@ const getDetail = async () => {
   const { code, data } = await fetchDetail(route.query.id);
   if (code === 0) {
     detail.value = data;
-    detail.value.applyFileViews.map(async (file, index) => {
-      const name = file.fileName;
-      const type = name.substring(name.lastIndexOf(".") + 1);
-      if (isImage(type)) {
-        applyImagesListIndex.value.push(index);
-        const blob = await downloadResource(file.fileId);
-        const url = window.URL.createObjectURL(blob);
-        applyImagesList.value.push(url);
-      }
-    });
+    // detail.value.applyFileViews.map(async (file, index) => {
+    //   const name = file.fileName;
+    //   const type = name.substring(name.lastIndexOf(".") + 1);
+    //   if (isImage(type)) {
+    //     applyImagesListIndex.value.push(index);
+    //     const blob = await downloadResource(file.fileId);
+    //     const url = window.URL.createObjectURL(blob);
+    //     applyImagesList.value.push(url);
+    //   }
+    // });
     if (data.applyStatus === 3) {
       getSealImages(data.applyId);
     }
 
   }
 };
+
+const images = ref([]);
 
 /**
  * 获取盖章文件
@@ -115,8 +125,8 @@ const getSealImages = async (applyId) => {
     data.map(async (item) => {
       const blob = await loadSealImage(item.smallUrl);
       const url = window.URL.createObjectURL(blob);
-      const bigBlob = await loadSealImage(item.bigUrl);
-      const bigUrl = window.URL.createObjectURL(bigBlob);
+      // const bigBlob = await loadSealImage(item.bigUrl);
+      // const bigUrl = window.URL.createObjectURL(bigBlob);
       sealImagesBig.value.push(bigUrl);
       sealImages.value.push({
         small: url,
@@ -128,22 +138,42 @@ const getSealImages = async (applyId) => {
 };
 const previewImages = ref([]);
 const handlePreview = async (img, index) => {
-  const { big } = img;
-  if (!big) {
-    const data = await loadSealImage(img.bigId);
-    const bigUrl = window.URL.createObjectURL(data);
-    img.big = bigUrl;
-    showImagePreview({
-      images: sealImagesBig.value,
-      startPosition: index,
+  currentIndex.value = index;
+  if (previewImages.value.length === 0) {
+    let loaded = 0;
+    const total = sealImages.value.length;
+    sealImages.value.map(async (file) => {
+      const bigBlob = await loadSealImage(file.bigId);
+      const bigUrl = window.URL.createObjectURL(bigBlob);
+      previewImages.value.push(bigUrl);
     });
+    loaded = loaded + 1;
+    if (loaded === total) {
+      images.value = previewImages.value;
+      show.value = true;
+    }
   } else {
-    // showImagePreview([big]);
-    showImagePreview({
-      images: sealImagesBig.value,
-      startPosition: index,
-    });
+    images.value = previewImages.value;
+    show.value = true;
   }
+  
+
+  // const { big } = img;
+  // if (!big) {
+  //   const data = await loadSealImage(img.bigId);
+  //   const bigUrl = window.URL.createObjectURL(data);
+  //   img.big = bigUrl;
+  //   showImagePreview({
+  //     images: sealImagesBig.value,
+  //     startPosition: index,
+  //   });
+  // } else {
+  //   // showImagePreview([big]);
+  //   showImagePreview({
+  //     images: sealImagesBig.value,
+  //     startPosition: index,
+  //   });
+  // }
 };
 
 /**
@@ -154,17 +184,48 @@ const downloadResource = async (fileId) => {
   return data;
 };
 
+const show = ref(false);
+const currentIndex = ref(0);
+const onChange = (newIndex) => {
+  currentIndex.value = newIndex;
+};
 const handleReview = async (file, index, tag) => {
-  const blob = await downloadResource(file.fileId);
+  // const blob = await downloadResource(file.fileId);
   const name = file.fileName;
   const type = name.substring(name.lastIndexOf(".") + 1);
   if (isImage(type)) {
-    const url = window.URL.createObjectURL(blob);
+    currentIndex.value = index;
+    if (applyImagesList.value.length === 0) {
+      console.log("请求全部材料图片");
+      let loaded = 0;
+      const total = detail.value.applyFileViews.length;
+      console.log(detail.value.applyFileViews.map)
+      detail.value.applyFileViews.map(async (file, index) => {
+        const name = file.fileName;
+        const type = name.substring(name.lastIndexOf(".") + 1);
+        if (isImage(type)) {
+          applyImagesListIndex.value.push(index);
+          const blob = await downloadResource(file.fileId);
+          const url = window.URL.createObjectURL(blob);
+          applyImagesList.value.push(url);
+        }
+        loaded = loaded + 1;
+        if (loaded === total) {
+          images.value = applyImagesList.value;
+          show.value = true;
+        }
+      });
+    } else {
+          images.value = applyImagesList.value;
+    show.value = true;
+    }
+
+    // const url = window.URL.createObjectURL(blob);
     // showImagePreview([url]);
-    showImagePreview({
-      images: applyImagesList.value,
-      startPosition: applyImagesListIndex.value.findIndex(value => value == index),
-    });
+    // showImagePreview({
+    //   images: applyImagesList.value,
+    //   startPosition: applyImagesListIndex.value.findIndex(value => value == index),
+    // });
   } else {
     router.push({
       name: "pdfPreviewer",
@@ -268,12 +329,12 @@ getDetail();
 </style>
 
 <style lang="scss">
-.van-image-preview__swipe {
-  &>div {
-    width: 1125px !important;;
-    &>div {
-      width: 100vw !important;;
-    }
-  }
-}
+// .van-image-preview__swipe {
+//   &>div {
+//     width: 1125px !important;;
+//     &>div {
+//       width: 100vw !important;;
+//     }
+//   }
+// }
 </style>
