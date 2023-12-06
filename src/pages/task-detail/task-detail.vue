@@ -95,16 +95,6 @@ const getDetail = async () => {
   const { code, data } = await fetchDetail(route.query.id);
   if (code === 0) {
     detail.value = data;
-    // detail.value.applyFileViews.map(async (file, index) => {
-    //   const name = file.fileName;
-    //   const type = name.substring(name.lastIndexOf(".") + 1);
-    //   if (isImage(type)) {
-    //     applyImagesListIndex.value.push(index);
-    //     const blob = await downloadResource(file.fileId);
-    //     const url = window.URL.createObjectURL(blob);
-    //     applyImagesList.value.push(url);
-    //   }
-    // });
     if (data.applyStatus === 3) {
       getSealImages(data.applyId);
     }
@@ -125,8 +115,6 @@ const getSealImages = async (applyId) => {
     data.map(async (item) => {
       const blob = await loadSealImage(item.smallUrl);
       const url = window.URL.createObjectURL(blob);
-      // const bigBlob = await loadSealImage(item.bigUrl);
-      // const bigUrl = window.URL.createObjectURL(bigBlob);
       sealImagesBig.value.push(bigUrl);
       sealImages.value.push({
         small: url,
@@ -156,24 +144,6 @@ const handlePreview = async (img, index) => {
     images.value = previewImages.value;
     show.value = true;
   }
-  
-
-  // const { big } = img;
-  // if (!big) {
-  //   const data = await loadSealImage(img.bigId);
-  //   const bigUrl = window.URL.createObjectURL(data);
-  //   img.big = bigUrl;
-  //   showImagePreview({
-  //     images: sealImagesBig.value,
-  //     startPosition: index,
-  //   });
-  // } else {
-  //   // showImagePreview([big]);
-  //   showImagePreview({
-  //     images: sealImagesBig.value,
-  //     startPosition: index,
-  //   });
-  // }
 };
 
 /**
@@ -219,13 +189,6 @@ const handleReview = async (file, index, tag) => {
           images.value = applyImagesList.value;
     show.value = true;
     }
-
-    // const url = window.URL.createObjectURL(blob);
-    // showImagePreview([url]);
-    // showImagePreview({
-    //   images: applyImagesList.value,
-    //   startPosition: applyImagesListIndex.value.findIndex(value => value == index),
-    // });
   } else {
     router.push({
       name: "pdfPreviewer",
