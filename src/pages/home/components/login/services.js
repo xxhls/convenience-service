@@ -8,6 +8,7 @@ export const sendCode = async (phone) => {
     data: {
       phoneNumber: encryptPhone,
     },
+    timeout: 0
   });
 };
 
