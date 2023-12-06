@@ -137,6 +137,8 @@ getTasks();
   display: flex;
   align-items: center;
   padding: 20px;
+  background-image: url("./images/bg.png");
+  // background-position: 0px, 0px;
   .right {
     .name {
       font-size: 19px;
@@ -163,11 +165,13 @@ getTasks();
   }
 }
 .my-business {
-  font-size: 17px;
-  font-weight: 400;
+  font-size: 25px;
+  font-weight: 500;
   color: #000;
   padding: 20px;
   padding-bottom: 0;
+  font-size: 16px;
+  font-weight: bold;
 }
 .num-list {
   padding: 20px 20px;
