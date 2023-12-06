@@ -14,7 +14,7 @@
 <script setup>
 import { inject } from "vue";
 import { loadImage, deleteFileById } from "@/services";
-import { APPLY_INFO_INJECT, FILE_SOURCE } from "../../../../context";
+import { APPLY_INFO_INJECT } from "../../../../context";
 import { uploadFile } from "./services";
 
 const applyInfo = inject(APPLY_INFO_INJECT);
@@ -51,23 +51,18 @@ const handleUploadDelete = async (file) => {
  * 加载文件
  */
 const init = () => {
-  // applyInfo.uploadFiles = [];
-  if (FILE_SOURCE.upload === applyInfo.fileSource) {
-    if (applyInfo.fileIdList.length !== 0) {
-      return;
-    }
-    applyInfo.fileIdList?.map(async (item) => {
-      const data = await loadImage(item.fileId);
+  applyInfo.uploadFiles?.map(async (item) => {
+    if (!item.url) {
+      item.status = "uploading";
+      item.message = "加载中……";
+      item.isImage = true;
+      const data = await loadImage(item.serverId);
       const url = window.URL.createObjectURL(data);
-      applyInfo.uploadFiles.push({
-        url,
-        serverId: item.fileId,
-        message: "",
-        status: "done",
-        isImage: true,
-      });
-    });
-  }
+      item.url = url;
+      item.status = "done";
+      item.message = "";
+    }
+  });
 };
 
 init();

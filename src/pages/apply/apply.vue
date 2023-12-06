@@ -54,7 +54,7 @@ import {
   StepFive,
 } from "./components";
 import { FILE_SOURCE, APPLY_INFO_INJECT } from "./context";
-import { showConfirmDialog } from 'vant';
+import { showConfirmDialog } from "vant";
 
 const route = useRoute();
 const router = useRouter();
@@ -132,7 +132,13 @@ const handleApplyFiles = (files) => {
   if (files.length === 0) return;
   const uploadType = files[0].uploadType;
   baseInfo.fileSource = uploadType;
-  baseInfo.fileIdList = files;
+  if (uploadType === FILE_SOURCE.upload) {
+    baseInfo.uploadFiles = files.map((item) => ({
+      serverId: item.fileId,
+    }));
+  } else {
+    baseInfo.fileIdList = files;
+  }
 };
 
 /** 当前步骤 */
@@ -159,19 +165,18 @@ const refMap = {
 };
 const handleGoback = () => {
   showConfirmDialog({
-    theme: 'round-button',
-    className: 'dialog-apply',
-    message:
-      '是否确认返回首页',
+    theme: "round-button",
+    className: "dialog-apply",
+    message: "是否确认返回首页",
   })
-  .then(() => {
-    // on confirm
-    router.go(-1);
-  })
-  .catch(() => {
-    // on cancel
-    return;
-  });
+    .then(() => {
+      // on confirm
+      router.go(-1);
+    })
+    .catch(() => {
+      // on cancel
+      return;
+    });
 };
 /** 下一步 */
 const toNext = async () => {
