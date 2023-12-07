@@ -75,6 +75,7 @@ const init = async () => {
 init();
 
 const validate = async () => {
+  if (!formRef.value) return Promise.resolve();
   try {
     await formRef.value.validate();
     return Promise.resolve();

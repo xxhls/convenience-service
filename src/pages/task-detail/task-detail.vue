@@ -28,7 +28,9 @@
         <div v-for="(item, index) in detail.applyFileViews" class="file-item">
           <span class="file-name">{{ item.fileName }}</span>
           <van-space :size="15" class="op-box">
-            <span class="op" @click="handleReview(item, index, 'preview')">预览</span>
+            <span class="op" @click="handleReview(item, index, 'preview')"
+              >预览</span
+            >
             <span class="op" @click="handleDownload(item)">下载</span>
           </van-space>
         </div>
@@ -59,11 +61,11 @@
         >重新编辑</van-button
       >
     </div>
-    <van-image-preview 
-    v-model:show="show" 
-    :images="images" 
-    :startPosition="currentIndex"
-    @change="onChange"
+    <van-image-preview
+      v-model:show="show"
+      :images="images"
+      :startPosition="currentIndex"
+      @change="onChange"
     >
       <template v-slot:index>第{{ currentIndex + 1 }}页</template>
     </van-image-preview>
@@ -71,20 +73,19 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import fileDownload from "js-file-download";
-import { showImagePreview } from "vant";
 import { isImage } from "@/utils";
 import { fetchDetail } from "@/services";
-import { FinishIcon, IngIcon, RejectIcon } from "./images";
+import { FinishIcon, IngIcon, RejectIcon, PaddingSealIcon } from "./images";
 import { download, fetchSealImages, loadSealImage } from "./service";
 
 const router = useRouter();
 const route = useRoute();
 const statusIcon = {
   0: IngIcon,
-  1: IngIcon,
+  1: PaddingSealIcon,
   2: RejectIcon,
   3: FinishIcon,
 };
@@ -98,7 +99,6 @@ const getDetail = async () => {
     if (data.applyStatus === 3) {
       getSealImages(data.applyId);
     }
-
   }
 };
 
@@ -164,10 +164,8 @@ const handleReview = async (file, index, tag) => {
   if (isImage(type)) {
     currentIndex.value = index;
     if (applyImagesList.value.length === 0) {
-      console.log("请求全部材料图片");
       let loaded = 0;
       const total = detail.value.applyFileViews.length;
-      console.log(detail.value.applyFileViews.map)
       detail.value.applyFileViews.map(async (file, index) => {
         const name = file.fileName;
         const type = name.substring(name.lastIndexOf(".") + 1);
@@ -184,8 +182,8 @@ const handleReview = async (file, index, tag) => {
         }
       });
     } else {
-          images.value = applyImagesList.value;
-    show.value = true;
+      images.value = applyImagesList.value;
+      show.value = true;
     }
   } else {
     router.push({
@@ -286,7 +284,6 @@ getDetail();
     max-width: 100%;
   }
 }
-
 </style>
 
 <style lang="scss">

@@ -18,7 +18,6 @@
 </template>
 
 <script setup>
-import { Overlay } from 'vant';
 import { inject, ref, nextTick, computed } from "vue";
 import { nanoid } from "nanoid";
 import {
@@ -51,6 +50,17 @@ const init = async () => {
   }
 };
 
+let canvas = null;
+let ctx = null;
+const computeTextLength = (text) => {
+  if (!canvas) {
+    canvas = document.createElement("canvas");
+    ctx = canvas.getContext("2d");
+  }
+  const { width } = ctx.measureText(text);
+  return width;
+};
+
 /**
  * 填充参数的值
  */
@@ -58,9 +68,8 @@ const fillParamsValue = (params) => {
   nextTick(() => {
     for (let item of params) {
       const target = document.getElementById(item.id);
-      console.log(target);
-      // target.style.width = "400px";
-      target.setAttribute("maxlength", 10000000000000);
+      const textWidth = computeTextLength(applyInfo.paramsValue[item.id]);
+      target.style.width = `${textWidth}px`;
       target.setAttribute("value", applyInfo.paramsValue[item.id]);
       target.setAttribute("data-value", applyInfo.paramsValue[item.id]);
       target.setAttribute("readonly", true);
@@ -82,7 +91,6 @@ const getImageList = () => {
 };
 
 const previewImage = (idx) => {
-  // showImagePreview([url]);
   showImagePreview({
     images: imageList.value,
     startPosition: idx,

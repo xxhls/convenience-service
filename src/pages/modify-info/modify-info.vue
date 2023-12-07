@@ -50,6 +50,7 @@
   <popup-info
     v-model:value="showPhonePopup"
     title="修改手机号"
+    :maxlength="11"
     :loading="phoneLoading"
     @sure="modifyPhone"
   >
@@ -70,6 +71,7 @@
     <van-field
       size="large"
       v-model="identityCard"
+      :maxlength="18"
       label="身份证号"
       placeholder="请输入身份证号"
     />
@@ -88,7 +90,12 @@ import { useRouter } from "vue-router";
 import { useUserInfoStore } from "@/store";
 import { RegionPicker } from "@/components";
 import { PopupInfo } from "./components";
-import { updateUserName, updatePhone, updateRegion, updateIdentityCard } from "./services";
+import {
+  updateUserName,
+  updatePhone,
+  updateRegion,
+  updateIdentityCard,
+} from "./services";
 
 const userStore = useUserInfoStore();
 /**
@@ -145,7 +152,7 @@ const modifyPhone = async () => {
     return;
   }
   try {
-    userLoading.value = true;
+    phoneLoading.value = true;
     const { code, msg } = await updatePhone({
       id: userId.value,
       userPhone: phone.value,
@@ -208,7 +215,7 @@ const modifyRegion = async (region) => {
     });
     if (code === 0) {
       showSuccessToast("编辑成功");
-      console.log(userStore.regionTag)
+      console.log(userStore.regionTag);
       if (userStore.regionTag === "user") {
         console.log("更新LINK_REGION");
         userStore.setLinkRegion(region);
