@@ -26,7 +26,7 @@ getBanners();
 
 <style lang="scss" scoped>
 .my-swipe {
-  margin: 20px;
+  margin: 10px 20px 0;
   .van-swipe-item {
     display: flex;
     align-items: center;
