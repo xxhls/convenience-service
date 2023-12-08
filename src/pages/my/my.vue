@@ -21,7 +21,7 @@
         @click="handleGotoList(item)"
       >
         <template #icon>
-          <van-image :src="item.icon" width="40px"></van-image>
+          <van-image :src="item.icon" width="24px"></van-image>
         </template>
         <template #value>
           <div class="value-box">{{ item.value }}</div>
@@ -29,7 +29,7 @@
       </van-cell>
     </div>
     <div class="footer">
-      <van-button type="danger" round block @click="deleteLogin">
+      <van-button type="primary" round block @click="deleteLogin">
         退出登录
       </van-button>
     </div>
@@ -138,7 +138,8 @@ getTasks();
   align-items: center;
   padding: 10px 0 20px 16px;
   background-image: url("./images/bg.png");
-  // background-position: 0px, 0px;
+  background-repeat: no-repeat;
+  // background-position: 0, 0;
   .right {
     .name {
       margin-bottom: 2px;
@@ -173,25 +174,30 @@ getTasks();
   }
 }
 .my-business {
-  font-size: 25px;
-  font-weight: 500;
-  color: #000;
-  padding: 20px;
+  padding: 30px 16px 0;
   padding-bottom: 0;
+  height: 22px;
   font-size: 16px;
   font-weight: bold;
+  color: #000000;
+  line-height: 22px;
+
 }
 .num-list {
-  padding: 20px 20px;
+  // padding: 20px 20px;
   .num-item {
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
     :deep(.van-cell__title) {
-      font-size: 17px;
-      font-weight: 400;
-      color: #000;
       margin-left: 12px;
+
+      height: 24px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #000000;
+      line-height: 24px;
+
     }
     .value-box {
       display: inline-flex;

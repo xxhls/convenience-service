@@ -49,6 +49,9 @@
             :loading="codeLoading"
             plain
             @click.stop="handleSendCode"
+            :style="{
+              color: sendCodeDisabled ? '#B4B4B4' : '#CC1D1D',
+            }"
             >发送验证码</van-button
           >
           <van-count-down
@@ -161,23 +164,56 @@ const handleClose = () => {
 .sendsms-button {
   color: #CC1D1D;
   border-color: white;
+  font-size: 14px;
+  font-weight: 400;
+  color: #B4B4B4;
 }
 .login-popup {
-  padding: 40px 20px;
+  padding: 20px 16px 10px;
   .title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #000000;
     text-align: center;
     margin-bottom: 50px;
+
+    height: 22px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+    line-height: 22px;
+
   }
   .mb-40 {
     border-bottom: 1px solid #D1D1D1;
-    margin-bottom: 40px;
+    margin-bottom: 52px;
+    padding: initial;
+    padding-bottom: 12px;
+    padding-left: 10px;
+    :deep(input) {
+      font-size: 14px;
+      font-weight: 400;
+      color: #000;
+      &::placeholder {
+        font-size: 14px;
+        font-weight: 400;
+        color: #B4B4B4;
+      }
+    }
   }
   .mb-20 {
     border-bottom: 1px solid #D1D1D1;
-    margin-bottom: 20px;
+    margin-bottom: 52px;
+    padding: initial;
+    padding-bottom: 12px;
+    padding-left: 10px;
+    :deep(input) {
+      font-size: 14px;
+      font-weight: 400;
+      color: #000;
+      &::placeholder {
+        font-size: 14px;
+        font-weight: 400;
+        color: #B4B4B4;
+      }
+    }
   }
   .mb-80 {
     margin-bottom: 80px;

@@ -1,6 +1,6 @@
 :root:root {
-  --van-button-primary-background: #F0BABA;
-  --van-button-primary-border-color: #F0BABA;
+  --van-button-primary-background: #CC1D1D;
+  --van-button-primary-border-color: #CC1D1D;
   --van-button--round-radius: 24px;
-  --van-button-disabled-opacity: initial;
+  --van-button-disabled-opacity: 0.5;
 }
