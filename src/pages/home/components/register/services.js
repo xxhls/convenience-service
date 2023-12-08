@@ -7,13 +7,14 @@ export const register = async ({
   regionId,
 }) => {
   const encryptPhone = await encrypt(userPhone);
+  const encryprIdCard = await encrypt(identityCard);
   return axiosIns.request({
     url: "/addUser",
     method: "POST",
     data: {
       userPhone: encryptPhone,
       userName,
-      identityCard,
+      identityCard: encryprIdCard,
       regionId,
     },
   });
