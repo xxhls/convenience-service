@@ -128,17 +128,21 @@ getTasks();
 </script>
 
 <style lang="scss" scoped>
+:deep(.van-cell) {
+  background-color: initial;
+}
 .my-box {
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-image: url("./images/bg.png");
 }
 .user-info {
   display: flex;
   align-items: center;
   padding: 10px 0 20px 16px;
-  background-image: url("./images/bg.png");
-  background-repeat: no-repeat;
+  
+  // background-repeat: no-repeat;
   // background-position: 0, 0;
   .right {
     .name {
