@@ -12,6 +12,7 @@
         title="我没有文件，根据要求填写信息"
         :name="FILE_SOURCE.templete"
         :lazy-render="false"
+        :disabled="noTemplete"
       >
         <fill-templete-params ref="FileTempleteParamsRef"> </fill-templete-params>
       </van-collapse-item>
@@ -25,9 +26,21 @@ import { computed, inject } from "vue";
 import { showFailToast } from "vant";
 import { FILE_SOURCE, APPLY_INFO_INJECT } from "../../context";
 import { FillTempleteParams, ManualUpload } from "./components";
+import { getTempleteParams } from "./services";
 
 const applyInfo = inject(APPLY_INFO_INJECT);
 const fileSource = computed(() => applyInfo.fileSource);
+
+const noTemplete = ref(false);
+const getParams = async () => {
+  const { code, data } = await getTempleteParams(applyInfo.businessId);
+  if (code === 200) {
+    // paramsHanlder(data.params);
+  } else if (code === 30001) {
+    noTemplete.value = true;
+    console.log(noTemplete.value);
+  }
+};
 
 const FileTempleteParamsRef = ref(null);
 
@@ -49,6 +62,7 @@ defineExpose({
   validate,
 });
 window.scrollTo(0, 0)
+getParams();
 </script>
 
 <style scoped lang="scss">

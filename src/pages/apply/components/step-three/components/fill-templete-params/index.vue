@@ -10,8 +10,10 @@
       :rules="[{ required: true, message: '请填写必备参数' }]"
     />
   </van-form>
-  <van-empty v-if="noTemplete" image-size="250" description="暂未绑定模板" />
   <van-empty v-if="noParams" image-size="250" description="该模板没有参数" />
+  <div v-if="noParams" class="tips">
+    无需填写信息，可以直接点击<span style="color: #CC1D1D;">“下一步”</span>
+  </div>
 </template>
 
 <script setup>
@@ -96,5 +98,15 @@ defineExpose({
       left: 0;
     }
   }
+}
+.tips {
+  width: 100%;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  background-color: #E6E6E6;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000;
 }
 </style>
