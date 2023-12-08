@@ -1,12 +1,12 @@
 <template>
   <div class="my-box">
     <div class="user-info">
-      <van-image round width="80px" height="80px" :src="DefaultIcon" />
+      <van-image round width="44px" height="44px" :src="DefaultIcon" />
       <div class="right">
         <div class="name">{{ userName }}</div>
         <div class="phone">
           <span>{{ phone }}</span>
-          <van-image width="19px" :src="EditIcon" class="edit-img" />
+          <van-image width="14px" :src="EditIcon" class="edit-img" />
           <span class="edit-text" @click="handleEdit">修改</span>
         </div>
       </div>
@@ -136,27 +136,35 @@ getTasks();
 .user-info {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 10px 0 20px 16px;
   background-image: url("./images/bg.png");
   // background-position: 0px, 0px;
   .right {
     .name {
-      font-size: 19px;
-      color: #000000;
+      margin-bottom: 2px;
+      height: 22px;
+      font-size: 16px;
       font-weight: bold;
-      margin-bottom: 8px;
+      color: #000000;
+      line-height: 22px;
     }
     .phone {
       display: flex;
       align-items: center;
-      font-size: 17px;
+
+      height: 20px;
+      font-size: 14px;
       font-weight: 400;
+      color: #000000;
+      line-height: 20px;
+
+
       .edit-img {
-        margin-left: 15px;
+        margin-left: 8px;
         margin-right: 5px;
       }
       .edit-text {
-        font-size: 17px;
+        font-size: 14px;
         font-weight: 400;
         color: #cc1d1d;
       }
