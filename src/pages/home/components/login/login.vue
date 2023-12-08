@@ -29,10 +29,11 @@
       <van-field
         v-model="loginModel.smsCode"
         size="large"
+        type="digit"
         center
         clearable
         class="mb-20"
-        placeholder="请输入短信验证码"
+        placeholder="请输入验证码"
         :rules="[{ required: true, message: '请输入验证码' }]"
       >
         <template #left-icon>
@@ -171,9 +172,11 @@ const handleClose = () => {
     margin-bottom: 50px;
   }
   .mb-40 {
+    border-bottom: 1px solid #D1D1D1;
     margin-bottom: 40px;
   }
   .mb-20 {
+    border-bottom: 1px solid #D1D1D1;
     margin-bottom: 20px;
   }
   .mb-80 {
