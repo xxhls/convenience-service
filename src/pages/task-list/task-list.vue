@@ -16,6 +16,7 @@
           <div class="task-no mb-20">
             <van-image :src="TaskNoIcon"></van-image>
             <span class="content">{{ item.applyNumber }}</span>
+            <span class="todetail">详情</span>
           </div>
           <div class="task-type mb-20">
             <span>业务类型：</span>
@@ -82,7 +83,8 @@ getTaskList();
   margin-bottom: 10px;
 }
 .mb-40 {
-  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #D1D1D1;
 }
 .task-box {
   height: 100vh;
@@ -93,11 +95,18 @@ getTaskList();
     overflow-y: auto;
     .task-item {
       padding: 20px;
+      padding-bottom: 0px;
       .task-no {
         display: flex;
         align-items: center;
         .content {
-          margin-left: 20px;
+          margin-left: 10px;
+
+        }
+        .todetail {
+          flex-grow: 1;
+          text-align: right;
+          color: #CC1D1D;
         }
       }
     }
