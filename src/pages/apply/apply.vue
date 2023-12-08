@@ -213,12 +213,13 @@ const toNext = async () => {
 }
 .buttons {
   position: fixed;
-  bottom: 10px;
+  bottom: 0;
   display: flex;
   width: 100%;
-  padding: 0 16px;
+  padding: 0 16px 10px 16px;
   box-sizing: border-box;
   gap: 10px;
+  background-color: #fff;
   .btn-item {
     flex: 1;
   }
