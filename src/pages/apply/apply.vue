@@ -36,6 +36,22 @@
         }}</van-button>
       </div>
     </div>
+    <van-dialog
+      class="dialog-back"
+      message-align="center"
+      @confirm="routerBack"
+      v-model:show="returnDialog" 
+      show-cancel-button
+      confirm-button-color="#CC1D1D"
+    >
+      <van-image
+         
+        :src="iconWarn" 
+        width="46" 
+        height="46" 
+         />
+      <p>返回后您所填写的基本信息将会被清空，是否继续返回至首页</p>
+    </van-dialog>
   </div>
 </template>
 
@@ -55,6 +71,7 @@ import {
 } from "./components";
 import { FILE_SOURCE, APPLY_INFO_INJECT } from "./context";
 import { showConfirmDialog } from "vant";
+import iconWarn from "./assets/warn.png";
 
 const route = useRoute();
 const router = useRouter();
@@ -163,20 +180,25 @@ const refMap = {
   4: ref(null),
   5: ref(null),
 };
+const returnDialog = ref(false);
+const routerBack = () => {
+  router.go(-1);
+}
 const handleGoback = () => {
-  showConfirmDialog({
-    theme: "round-button",
-    className: "dialog-apply",
-    message: "返回后您所填写的基本信息将会被清空，是否继续返回至首页",
-  })
-    .then(() => {
-      // on confirm
-      router.go(-1);
-    })
-    .catch(() => {
-      // on cancel
-      return;
-    });
+  returnDialog.value = true;
+  // showConfirmDialog({
+  //   theme: "round-button",
+  //   className: "dialog-apply",
+  //   message: "返回后您所填写的基本信息将会被清空，是否继续返回至首页",
+  // })
+  //   .then(() => {
+  //     // on confirm
+  //     router.go(-1);
+  //   })
+  //   .catch(() => {
+  //     // on cancel
+  //     return;
+  //   });
 };
 
 /** 下一步 */
@@ -248,6 +270,21 @@ const toNext = async () => {
     button:nth-child(2) {
       color: #CC1D1D;
     }
+  }
+}
+</style>
+
+<style lang="scss">
+.dialog-back {
+  &>.van-dialog__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 28px 60px 28px;
+  }
+  button {
+    border-top: 1px solid #D1D1D1;
   }
 }
 </style>
