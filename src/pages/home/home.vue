@@ -109,17 +109,19 @@ onBeforeMount(() => {
 
 <style lang="scss" scoped>
 .business-box {
-  padding: 20px;
+  padding: 20px 16px;
   .business-list {
     margin-bottom: 50px;
   }
   .title {
-    font-size: 18px;
+    height: 22px;
+    font-size: 16px;
     font-weight: bold;
     color: #000000;
+    line-height: 22px;
   }
   .inner {
-    margin-top: 30px;
+    margin-top: 24px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -127,7 +129,6 @@ onBeforeMount(() => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
     }
     .business-name {
       padding-top: 10px;
