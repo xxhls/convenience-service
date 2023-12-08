@@ -20,17 +20,27 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .qj-region-show {
+  height: 36px;
   display: flex;
+  box-sizing: border-box;
   align-items: center;
   padding: 10px 20px;
   background-color: #fdf3f3;
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
   .text {
     flex-grow: 1;
     text-overflow: ellipsis;
-    font-size: 20px;
+    padding-left: 6px;
+    width: 168px;
+    height: 17px;
+    font-size: 12px;
+    font-family: PingFang SC, PingFang SC;
     font-weight: 400;
     color: #000000;
-    padding-left: 12px;
+    line-height: 16px;
   }
 }
 </style>
