@@ -208,12 +208,14 @@ const toNext = async () => {
   }
   .main {
     flex: 1;
-    padding-bottom: 74px;
+    // height: clac(100vh-200px);
+    overflow-y: scroll;
+    padding-bottom: 20px;
   }
 }
 .buttons {
-  position: fixed;
-  bottom: 0;
+  // position: fixed;
+  // bottom: 0;
   display: flex;
   width: 100%;
   padding: 0 16px 10px 16px;

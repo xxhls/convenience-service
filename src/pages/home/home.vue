@@ -1,5 +1,6 @@
 <template>
   <div>
+    这是最新版本
     <region :region-name="linkRegionName"></region>
     <banner></banner>
     <div class="business-box">
