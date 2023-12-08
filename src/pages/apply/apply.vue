@@ -283,6 +283,9 @@ const toNext = async () => {
     text-align: center;
     padding: 40px 28px 60px 28px;
   }
+  p {
+    line-height: 1.5;
+  }
   button {
     border-top: 1px solid #D1D1D1;
   }

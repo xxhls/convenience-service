@@ -43,8 +43,8 @@
   >
     <van-field
       v-model="userName"
-      label="真实姓名"
       size="large"
+      clearable
       placeholder="请输入姓名"
     />
   </popup-info>
@@ -59,7 +59,7 @@
     <van-field
       size="large"
       v-model="phone"
-      label="手机号"
+      clearable
       placeholder="请输入手机号"
     />
   </popup-info>
@@ -74,7 +74,7 @@
       size="large"
       v-model="identityCard"
       :maxlength="18"
-      label="身份证号"
+      clearable
       placeholder="请输入身份证号"
     />
   </popup-info>
@@ -236,7 +236,7 @@ const modifyRegion = async (region) => {
   padding: 0;
   padding-top: 20px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #D1D1D1;
+  border-bottom: 1px solid #D1D1D1;
   :deep(.van-cell__title) {
     font-weight: 400;
     font-size: 14px;
