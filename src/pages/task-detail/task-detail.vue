@@ -11,7 +11,7 @@
         <van-image :src="statusIcon[detail.applyStatus]"></van-image>
       </div>
 
-      <div class="info-item van-hairline--bottom">
+      <div style="padding-top: 5px;" class="info-item van-hairline--bottom">
         <span class="label">姓名：</span>
         <span>{{ detail.applyUserName }}</span>
       </div>
@@ -226,7 +226,7 @@ getDetail();
     font-weight: bold;
   }
   .content {
-    padding: 30px 20px;
+    padding: 20px 16px;
     flex: 1;
     .base-info {
       display: flex;
@@ -239,16 +239,18 @@ getDetail();
       display: flex;
       padding: 20px 0;
       align-items: center;
+      border-bottom: 1px solid #D1D1D1;
       .label {
-        width: 120px;
+        // width: 120px;
         flex-shrink: 0;
       }
     }
 
     .file-item {
-      padding: 10px 0;
+      padding: 10px 0 20px;
       display: flex;
       align-items: center;
+      border-bottom: 1px solid #D1D1D1;
       .file-name {
         flex: 1;
         word-break: break-all;
