@@ -71,7 +71,7 @@ const afterStyle = computed(() => {
 <style lang="scss" scoped>
 .step-bar_box {
   margin-top: 20px;
-  font-size: 15px;
+  font-size: 13px;
 }
 .value-container {
   display: grid;
@@ -83,24 +83,28 @@ const afterStyle = computed(() => {
     &.active {
       .num {
         color: red;
-        border-color: red;
+        border-color: #CC1D1D;
       }
       .before {
-        background-color: red;
+        background-color: #CC1D1D;
       }
     }
     .num {
       border-radius: 50px;
       padding: 2px 15px;
-      border: 1px solid gray;
+      border: 1px solid #D1D1D1;
       font-weight: bold;
+      color: #D1D1D1;
+    }
+    .before {
+      color: #D1D1D1;
     }
     .line {
       flex: 1;
       height: 2px;
-      background-color: gray;
+      background-color: #D1D1D1;
       &.active {
-        background-color: red;
+        background-color: #CC1D1D;
       }
     }
   }
@@ -113,7 +117,7 @@ const afterStyle = computed(() => {
   .label-item {
     text-align: center;
     &.active {
-      color: red;
+      color: #CC1D1D;
     }
   }
 }

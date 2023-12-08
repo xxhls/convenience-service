@@ -31,7 +31,7 @@
         >
       </div>
       <div class="btn-item">
-        <van-button block round type="danger" @click="toNext">{{
+        <van-button block round type="primary" @click="toNext">{{
           toNextLabel
         }}</van-button>
       </div>
@@ -178,6 +178,12 @@ const handleGoback = () => {
       return;
     });
 };
+
+// isNextBtnDisabled = computed(() => {
+//   const curModuleRef = refMap[currentStep.value];
+//   return curModuleRef.value?.isNextBtnDisabled;
+// });
+
 /** 下一步 */
 const toNext = async () => {
   if (currentStep.value === 5) {
