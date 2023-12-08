@@ -179,19 +179,13 @@ const handleGoback = () => {
     });
 };
 
-
-
 /** 下一步 */
 const toNext = async () => {
   if (currentStep.value === 5) {
     router.go(-1);
   }
   const curModuleRef = refMap[currentStep.value];
-  try {
-    await curModuleRef.value?.validate();
-  } catch (error) {
-    return;
-  }
+  await curModuleRef.value?.validate();
   currentStep.value = currentStep.value + 1;
 };
 
