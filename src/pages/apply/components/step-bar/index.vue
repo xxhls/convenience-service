@@ -82,7 +82,7 @@ const afterStyle = computed(() => {
     align-items: center;
     &.active {
       .num {
-        color: red;
+        color: #CC1D1D;
         border-color: #CC1D1D;
       }
       .before {
