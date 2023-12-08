@@ -40,11 +40,13 @@
         </template>
         <template #button>
           <van-button
+            class="sendsms-button"
             v-if="!codeSended && !busy"
             :disabled="sendCodeDisabled"
             size="small"
             type="primary"
             :loading="codeLoading"
+            plain
             @click.stop="handleSendCode"
             >发送验证码</van-button
           >
@@ -132,7 +134,7 @@ const handleLogin = async () => {
       setToken(token);
       handleClose();
       emit("login:success", user);
-    } else if (code === 2002) {
+    } else if (code === 20020) {
       handleClose();
       emit("login:register");
     } else if (code === 20016) {
@@ -155,6 +157,10 @@ const handleClose = () => {
 </script>
 
 <style lang="scss" scoped>
+.sendsms-button {
+  color: #CC1D1D;
+  border-color: white;
+}
 .login-popup {
   padding: 40px 20px;
   .title {
@@ -188,4 +194,5 @@ const handleClose = () => {
     }
   }
 }
+
 </style>
