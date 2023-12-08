@@ -1,7 +1,8 @@
 <template>
   <van-nav-bar left-arrow title="修改个人信息" @clickLeft="handleGoback" />
 
-  <van-cell
+  <div style="padding: 0 16px;">
+    <van-cell
     is-link
     title="真实姓名"
     :value="userStore.userName"
@@ -32,6 +33,7 @@
     class="first-cell"
     @click="handleUpdateRegion"
   />
+  </div>
 
   <popup-info
     v-model:value="showUserNamePopup"
@@ -231,14 +233,20 @@ const modifyRegion = async (region) => {
 
 <style scoped lang="scss">
 .first-cell {
+  padding: 0;
   padding-top: 20px;
   padding-bottom: 20px;
+  border-bottom: 2px solid #D1D1D1;
   :deep(.van-cell__title) {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
     color: rgba(0, 0, 0, 1);
     .van-cell__label {
-      font-size: 15px;
+      height: 20px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #000000;
+      line-height: 20px;
     }
   }
   :deep(.van-cell__value) {
