@@ -171,6 +171,7 @@ defineExpose({
   validate,
 });
 init();
+window.scrollTo(0, 0)
 </script>
 
 <style scoped lang="scss">

@@ -179,10 +179,7 @@ const handleGoback = () => {
     });
 };
 
-// isNextBtnDisabled = computed(() => {
-//   const curModuleRef = refMap[currentStep.value];
-//   return curModuleRef.value?.isNextBtnDisabled;
-// });
+
 
 /** 下一步 */
 const toNext = async () => {
@@ -190,7 +187,11 @@ const toNext = async () => {
     router.go(-1);
   }
   const curModuleRef = refMap[currentStep.value];
-  await curModuleRef.value?.validate();
+  try {
+    await curModuleRef.value?.validate();
+  } catch (error) {
+    return;
+  }
   currentStep.value = currentStep.value + 1;
 };
 
@@ -207,12 +208,15 @@ const toNext = async () => {
   }
   .main {
     flex: 1;
+    padding-bottom: 74px;
   }
 }
 .buttons {
+  position: fixed;
+  bottom: 10px;
   display: flex;
   width: 100%;
-  padding: 40px;
+  padding: 0 16px;
   box-sizing: border-box;
   gap: 10px;
   .btn-item {

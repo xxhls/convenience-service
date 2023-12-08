@@ -80,6 +80,7 @@ const idReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)|(^$)/;
 defineExpose({
   validate,
 });
+window.scrollTo(0, 0)
 </script>
 
 <style scoped lang="scss">

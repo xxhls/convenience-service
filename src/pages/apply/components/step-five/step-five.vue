@@ -17,6 +17,7 @@ import { APPLY_INFO_INJECT } from "../../context";
 import CompletePng from "./assets/complete.png";
 
 const baseInfo = inject(APPLY_INFO_INJECT);
+window.scrollTo(0, 0)
 </script>
 
 <style scoped lang="scss">

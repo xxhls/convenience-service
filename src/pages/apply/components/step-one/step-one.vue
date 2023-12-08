@@ -47,6 +47,7 @@ defineExpose({
   validate,
 });
 fetchReadMe();
+window.scrollTo(0, 0)
 </script>
 <style lang="scss">
 .pg-business-step-one {
