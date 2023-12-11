@@ -1,17 +1,35 @@
 <template>
   <div class="preview-box">
-    <div v-if="isTemplete">
+    <div class="change">
+      <div class="icon" @click="lastImage">{{ "<" }}</div>
+      <div>{{ `${currentImageIndex + 1}/${imageList.length}` }}</div>
+      <div class="icon" @click="nextImage">{{ ">" }}</div>
+    </div>
+    <div v-if="isTemplete" class="html-box">
       <div v-if="html" v-html="html" ref="htmlRef"></div>
     </div>
-    <div v-else>
-      <div class="img-box">
-        <img
+    <div v-else class="img-box">
+      <van-image
+        :src="imageList[currentImageIndex]"
+        @click="previewImage(currentImageIndex)"
+      />
+      <!-- <div class="img-box"> -->
+        <!-- <img
           v-for="(item, index) in imageList"
           :key="index"
           :src="item"
           @click="previewImage(index)"
-        />
-      </div>
+        /> -->
+        <!-- <van-swipe class="my-swipe" indicator-color="white">
+          <van-swipe-item v-for="(item, index) in imageList">
+            <van-image
+              :key="index"
+              :src="item"
+              @click="previewImage(index)"
+            />
+          </van-swipe-item>
+        </van-swipe> -->
+      <!-- </div> -->
     </div>
     <van-overlay :show="show" />
   </div>
@@ -89,6 +107,18 @@ const getImageList = () => {
     imageList.value.push(url);
   });
 };
+
+const currentImageIndex = ref(0);
+const lastImage = () => {
+  if (currentImageIndex.value > 0) {
+    currentImageIndex.value--;
+  }
+};
+const nextImage = () => {
+  if (currentImageIndex.value < imageList.value.length - 1) {
+    currentImageIndex.value++;
+  }
+}
 
 const previewImage = (idx) => {
   showImagePreview({
@@ -176,15 +206,56 @@ window.scrollTo(0, 0)
 
 <style scoped lang="scss">
 .preview-box {
-  padding: 0 40px 20px 40px;
+  padding-top: 40px;
+  // padding: 0 40px 20px 40px;
 }
-.img-box {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  img {
-    max-width: 100%;
-    display: block;
+.change {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+
+  .icon {
+    height: 30px;
+    width: 30px;
+    background-color: #F5F5F5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    margin: 0 60px;
   }
 }
+.img-box {
+  margin: 0 16px;
+  border: 1px solid #D1D1D1;
+  padding: 16px;
+  border: 1px solid #D1D1D1;
+  border-radius: 12px;
+  height: 454px;
+  overflow-y: scroll;
+}
+.html-box {
+  margin: 0 16px;
+  border: 1px solid #D1D1D1;
+  padding: 16px;
+  border: 1px solid #D1D1D1;
+  border-radius: 12px;
+  height: 454px;
+  overflow-y: scroll;
+}
+
+// .img-box {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   gap: 20px;
+//   img {
+//     max-width: 100%;
+//     display: block;
+//   }
+// }
 </style>

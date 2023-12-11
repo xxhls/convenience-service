@@ -22,6 +22,7 @@ window.scrollTo(0, 0)
 
 <style scoped lang="scss">
 .complete-box {
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
