@@ -1,4 +1,5 @@
 <template>
+  <p class="title">请填写基本信息：</p>
   <van-form ref="formRef">
     <van-cell-group inset>
       <van-field
@@ -85,10 +86,13 @@ window.scrollTo(0, 0)
 
 <style scoped lang="scss">
 .title {
-  font-size: 18px;
+  padding: 0 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 20px;
+  font-size: 14px;
   font-weight: bold;
   color: #000000;
-  padding: 0 30px;
-  margin-bottom: 50px;
+  line-height: 20px;
 }
 </style>

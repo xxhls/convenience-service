@@ -1,4 +1,5 @@
 <template>
+  <p class="title">{{ applyInfo.businessName }}流程：</p>
   <div class="pg-business-step-one">
     <div v-if="tipsHTML" class="html__container" v-html="tipsHTML"></div>
     <div class="readme-box">
@@ -29,6 +30,7 @@ watch(
 );
 
 const fetchReadMe = async () => {
+  console.log(applyInfo)
   if (!applyInfo.businessId) return;
   const { code, data } = await getReadMe(applyInfo.businessId);
   if (code === 0) {
@@ -50,6 +52,16 @@ fetchReadMe();
 window.scrollTo(0, 0)
 </script>
 <style lang="scss">
+.title {
+  padding: 0 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000000;
+  line-height: 20px;
+}
 .pg-business-step-one {
   padding: 0 30px;
   .title {

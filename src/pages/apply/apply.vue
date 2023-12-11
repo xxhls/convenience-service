@@ -6,7 +6,7 @@
       @clickLeft="handleGoback"
     />
     <step-bar :currentStep="currentStep" />
-    <div class="van-hairline--bottom step-container"></div>
+    <!-- <div class="van-hairline--bottom step-container"></div> -->
     <div class="main">
       <div v-if="currentStep === 1">
         <step-one :ref="refMap[1]" />
