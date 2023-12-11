@@ -101,7 +101,7 @@ const afterStyle = computed(() => {
     }
     .line {
       flex: 1;
-      height: 2px;
+      height: 1px;
       background-color: #D1D1D1;
       &.active {
         background-color: #CC1D1D;

@@ -1,4 +1,5 @@
 <template>
+  <div v-if="!noParams" class="title3">请填写基本信息：</div>
   <van-form ref="formRef" v-if="!noParams && !noTemplete" class="input-form">
     <van-field
       v-for="item in params"
@@ -120,6 +121,15 @@ defineExpose({
     border: 1px solid #D1D1D1;
     border-radius: 6px;
   }
+}
+.title3 {
+  padding: 0 0px;
+  height: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000000;
+  line-height: 20px;
+  margin-bottom: 20px;
 }
 .tips {
   width: 100%;

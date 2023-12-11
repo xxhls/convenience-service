@@ -63,7 +63,7 @@ window.scrollTo(0, 0)
   line-height: 20px;
 }
 .pg-business-step-one {
-  padding: 0 30px;
+  padding: 0 16px;
   .title {
     font-weight: bold;
     color: #000000;
