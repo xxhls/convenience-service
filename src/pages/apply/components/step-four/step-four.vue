@@ -1,6 +1,6 @@
 <template>
   <div class="preview-box">
-    <div class="change">
+    <div class="change" v-if="!isTemplete">
       <div class="icon" @click="lastImage">{{ "<" }}</div>
       <div>{{ `${currentImageIndex + 1}/${imageList.length}` }}</div>
       <div class="icon" @click="nextImage">{{ ">" }}</div>

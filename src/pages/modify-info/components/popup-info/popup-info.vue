@@ -71,7 +71,10 @@ const handleClose = () => {
   padding-right: 0!important;
   padding-top: 0px!important;
   padding-bottom: 6px!important;
-  border-bottom: 1px solid #D1D1D1;
+  border-bottom: 1px solid #F5F5F5;
+}
+:deep(.van-field__body) {
+  padding: 0 10px;
 }
 .popup-title {
   text-align: center;

@@ -182,7 +182,7 @@ const handleClose = () => {
 
   }
   .mb-40 {
-    border-bottom: 1px solid #D1D1D1;
+    border-bottom: 1px solid #F5F5F5;
     margin-bottom: 52px;
     padding: initial;
     padding-bottom: 12px;
@@ -199,7 +199,7 @@ const handleClose = () => {
     }
   }
   .mb-20 {
-    border-bottom: 1px solid #D1D1D1;
+    border-bottom: 1px solid #F5F5F5;
     margin-bottom: 52px;
     padding: initial;
     padding-bottom: 12px;

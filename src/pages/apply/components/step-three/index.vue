@@ -67,7 +67,8 @@ getParams();
 
 <style scoped lang="scss">
 .file-source_box {
-  padding: 0 20px;
+  margin-top: 20px;
+  padding: 0 16px;
   :deep(.van-radio__label) {
     flex: 1;
   }

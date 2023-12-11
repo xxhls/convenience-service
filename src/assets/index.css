@@ -5,4 +5,7 @@
   --van-button-disabled-opacity: 0.5;
   --van-nav-bar-icon-color: #CC1D1D;
   --van-radio-checked-icon-color: #CC1D1D;
+  --van-tabbar-item-active-color: #CC1D1D;
+  --van-cell-border-color: transparent;
+  --van-tabs-bottom-bar-color: #CC1D1D;
 }

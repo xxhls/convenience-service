@@ -190,6 +190,7 @@ getTasks();
 .num-list {
   // padding: 20px 20px;
   .num-item {
+    --van-cell-border-color: #F5F5F5;
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -202,6 +203,9 @@ getTasks();
       color: #000000;
       line-height: 24px;
 
+    }
+    :deep(.van-cell) {
+      --van-cell-border-color: #D1D1D1;
     }
     .value-box {
       display: inline-flex;

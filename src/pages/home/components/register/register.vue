@@ -1,7 +1,7 @@
 <template>
   <van-popup :show="props.value" round position="bottom" class="login-popup">
     <div class="title">确认基本信息</div>
-    <van-form ref="registerForm">
+    <van-form ref="registerForm" class="input-form">
       <van-field
         v-model="registerModel.userName"
         size="large"
@@ -10,6 +10,7 @@
         center
         clearable
         label="姓名"
+        label-align="top"
         placeholder="请输入姓名"
         :rules="[{ required: true, message: '请输入姓名' }]"
       >
@@ -22,6 +23,7 @@
         class="mb-40"
         center
         clearable
+        label-align="top"
         label="手机号"
         placeholder="请输入手机号"
         :rules="[{ required: true, message: '请输入手机号' }]"
@@ -34,15 +36,17 @@
         center
         clearable
         label="身份证号"
+        label-align="top"
         placeholder="请输入身份证号"
       >
       </van-field>
       <van-field
         required
         v-model="registerModel.regionName"
-        is-link
+
         readonly
         size="large"
+        label-align="top"
         class="mb-40"
         center
         clearable
@@ -119,8 +123,28 @@ const handleRegister = async () => {
 </script>
 
 <style lang="scss" scoped>
+.input-form {
+  :deep(.van-field) {
+    padding: 0;
+  }
+  :deep(.van-cell__title) {
+    height: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 20px;
+    margin-bottom: 0;
+  }
+  :deep(.van-cell__value) {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #D1D1D1;
+    border-radius: 6px;
+  }
+}
 .login-popup {
-  padding: 40px 20px;
+  padding: 20px 16px 10px 16px;
   .title {
     font-size: 20px;
     font-weight: bold;
@@ -129,7 +153,7 @@ const handleRegister = async () => {
     margin-bottom: 50px;
   }
   .mb-40 {
-    margin-bottom: 40px;
+    // margin-bottom: 40px;
   }
 }
 </style>

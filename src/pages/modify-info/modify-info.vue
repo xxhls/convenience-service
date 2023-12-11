@@ -236,7 +236,7 @@ const modifyRegion = async (region) => {
   padding: 0;
   padding-top: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #D1D1D1;
+  border-bottom: 1px solid #F5F5F5;
   :deep(.van-cell__title) {
     font-weight: 400;
     font-size: 14px;
@@ -249,7 +249,9 @@ const modifyRegion = async (region) => {
       line-height: 20px;
     }
   }
+
   :deep(.van-cell__value) {
+    padding: 0 10px;
     font-weight: 400;
     font-size: 16px;
     color: rgba(0, 0, 0, 1);
