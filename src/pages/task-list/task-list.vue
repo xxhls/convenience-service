@@ -84,7 +84,7 @@ getTaskList();
 }
 .mb-40 {
   padding-bottom: 20px;
-  border-bottom: 1px solid #D1D1D1;
+  border-bottom: 1px solid #F5F5F5;
 }
 .task-box {
   height: 100vh;

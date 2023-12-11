@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="footer" v-if="detail.applyStatus === 2">
-      <van-button type="danger" round block @click="handleReEdit"
+      <van-button type="primary" round block @click="handleReEdit"
         >重新编辑</van-button
       >
     </div>
@@ -239,7 +239,7 @@ getDetail();
       display: flex;
       padding: 20px 0;
       align-items: center;
-      border-bottom: 1px solid #D1D1D1;
+      border-bottom: 1px solid #F5F5F5;
       .label {
         // width: 120px;
         flex-shrink: 0;
@@ -250,7 +250,7 @@ getDetail();
       padding: 10px 0 20px;
       display: flex;
       align-items: center;
-      border-bottom: 1px solid #D1D1D1;
+      // border-bottom: 1px solid #F5F5F5;
       .file-name {
         flex: 1;
         word-break: break-all;
@@ -267,8 +267,10 @@ getDetail();
     }
     .reject-reson {
       margin-top: 10px;
-      border-radius: 5px;
-      padding: 5px;
+      height: 160px;
+      overflow-y: scroll;
+      border-radius: 6px;
+      padding: 10px;
     }
   }
   .footer {

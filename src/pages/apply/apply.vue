@@ -186,19 +186,6 @@ const routerBack = () => {
 }
 const handleGoback = () => {
   returnDialog.value = true;
-  // showConfirmDialog({
-  //   theme: "round-button",
-  //   className: "dialog-apply",
-  //   message: "返回后您所填写的基本信息将会被清空，是否继续返回至首页",
-  // })
-  //   .then(() => {
-  //     // on confirm
-  //     router.go(-1);
-  //   })
-  //   .catch(() => {
-  //     // on cancel
-  //     return;
-  //   });
 };
 
 /** 下一步 */
