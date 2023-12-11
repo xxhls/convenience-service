@@ -1,11 +1,13 @@
 <template>
-  <van-form ref="formRef" v-if="!noParams && !noTemplete" class="templete-form">
+  <van-form ref="formRef" v-if="!noParams && !noTemplete" class="input-form">
     <van-field
       v-for="item in params"
+      required
       :key="item.id"
       v-model="applyInfo.paramsValue[item.id]"
       size="large"
       :label="item.name"
+      label-align="top"
       :placeholder="item.description"
       :rules="[{ required: true, message: '请填写必备参数' }]"
     />
@@ -97,6 +99,26 @@ defineExpose({
     &::after {
       left: 0;
     }
+  }
+}
+.input-form {
+  :deep(.van-field) {
+    padding: 0;
+  }
+  :deep(.van-cell__title) {
+    height: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 20px;
+    margin-bottom: 0;
+  }
+  :deep(.van-cell__value) {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #D1D1D1;
+    border-radius: 6px;
   }
 }
 .tips {

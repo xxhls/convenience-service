@@ -1,6 +1,6 @@
 <template>
   <p class="title">请填写基本信息：</p>
-  <van-form ref="formRef">
+  <van-form ref="formRef" class="input-form">
     <van-cell-group inset>
       <van-field
         size="large"
@@ -37,7 +37,6 @@
       <van-field
         required
         readonly
-        is-link
         v-model="formData.regionName"
         size="large"
         label="所属区域"
@@ -85,6 +84,26 @@ window.scrollTo(0, 0)
 </script>
 
 <style scoped lang="scss">
+.input-form {
+  :deep(.van-field) {
+    padding: 0;
+  }
+  :deep(.van-cell__title) {
+    height: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 20px;
+    margin-bottom: 0;
+  }
+  :deep(.van-cell__value) {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #D1D1D1;
+    border-radius: 6px;
+  }
+}
 .title {
   padding: 0 16px;
   margin-top: 20px;
