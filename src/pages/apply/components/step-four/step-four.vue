@@ -1,9 +1,18 @@
 <template>
   <div class="preview-box">
     <div class="change" v-if="!isTemplete">
-      <div class="icon" @click="lastImage">{{ "<" }}</div>
+      <!-- <div class="icon" @click="lastImage">{{ "<" }}</div> -->
+      <van-image 
+      class="icon" 
+      @click="lastImage" 
+      :src="currentImageIndex === 0 ? iconLeftNo : iconLeftYes" />
       <div>{{ `${currentImageIndex + 1}/${imageList.length}` }}</div>
-      <div class="icon" @click="nextImage">{{ ">" }}</div>
+      <!-- <div class="icon" @click="nextImage">{{ ">" }}</div> -->
+      <van-image 
+      class="icon" 
+      @click="nextImage" 
+      :src="currentImageIndex === imageList.length - 1 ? iconRightNo : iconRightYes" 
+      />
     </div>
     <div v-if="isTemplete" class="html-box">
       <div v-if="html" v-html="html" ref="htmlRef"></div>
@@ -48,6 +57,10 @@ import { loadImage, deleteFileById } from "@/services";
 import { getTempleteParams } from "../../services";
 import { FILE_SOURCE, APPLY_INFO_INJECT } from "../../context";
 import { create, generateDoc } from "./services";
+import iconLeftYes from "./assets/左实.png";
+import iconLeftNo from "./assets/左虚.png";
+import iconRightYes from "./assets/右实.png";
+import iconRightNo from "./assets/右虚.png";
 
 const applyInfo = inject(APPLY_INFO_INJECT);
 const html = ref("");
@@ -222,11 +235,11 @@ window.scrollTo(0, 0)
   .icon {
     height: 30px;
     width: 30px;
-    background-color: #F5F5F5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 999px;
+    // background-color: #F5F5F5;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // border-radius: 999px;
     margin: 0 60px;
   }
 }
