@@ -114,6 +114,7 @@ onBeforeMount(() => {
     margin-bottom: 50px;
   }
   .title {
+    padding: 0;
     height: 22px;
     font-size: 16px;
     font-weight: bold;
